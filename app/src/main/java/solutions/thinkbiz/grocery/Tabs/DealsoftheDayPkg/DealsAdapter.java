@@ -1,6 +1,7 @@
-package solutions.thinkbiz.grocery.DealsoftheDayPkg;
+package solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import solutions.thinkbiz.grocery.R;
+import solutions.thinkbiz.grocery.RecyclerViewItemClickListener;
+import solutions.thinkbiz.grocery.Tabs.TabDetailsActivity;
 
 /**
  * Created by User on 14-Feb-19.
@@ -44,6 +47,14 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ProductViewH
         holder.textViewPrice.setText(product.getmPrice());
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getmImageUrl()));
 
+        holder.setItemClickListener(new RecyclerViewItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(view.getContext(), TabDetailsActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -52,10 +63,12 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ProductViewH
     }
 
 
-    class ProductViewHolder extends RecyclerView.ViewHolder {
+    class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
         TextView textViewTitle, textViewoff, textViewpricetype, textViewPrice;
         ImageView imageView;
+
+        private RecyclerViewItemClickListener itemClickListener;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -65,6 +78,18 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ProductViewH
             textViewpricetype = itemView.findViewById(R.id.crncytype);
             textViewPrice = itemView.findViewById(R.id.pricetext1);
             imageView = itemView.findViewById(R.id.imageview);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            this.itemClickListener.onClick(v,getLayoutPosition());
+        }
+
+        public void setItemClickListener(RecyclerViewItemClickListener ic)
+        {
+            this.itemClickListener=ic;
+
         }
     }
 }

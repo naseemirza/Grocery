@@ -23,16 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="Get Started"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="20sp">
-
-                </TextView>
 
             <RelativeLayout
                 android:id="@+id/CartRltv"
@@ -62,32 +52,35 @@
                     android:background="@drawable/round_textview"
                     android:gravity="center"
                     android:paddingStart="10dp"
+                    android:layout_marginTop="1dp"
                     android:text="0"
                     android:textColor="@color/colorWhite" />
 
             </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/etext"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_weight="0.54"
+                    android:background="@drawable/edittextcorners"
+                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:editable="false"
+                    android:focusableInTouchMode="false"
+                    android:cursorVisible="false"
+                    android:hint=" Search for products..."
+                    android:paddingStart="10dp"
+                    android:layout_marginEnd="80dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:textColor="#2F2F2F"
+                    android:textColorHint="#999999"
+                    android:textSize="15sp" />
             </RelativeLayout>
 
         </android.support.v7.widget.Toolbar>
 
-        <EditText
-            android:id="@+id/etext"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="0.54"
-            android:background="@drawable/edittextcorners"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:editable="false"
-            android:focusableInTouchMode="false"
-            android:cursorVisible="false"
-            android:hint=" Search for products..."
-            android:paddingStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textColor="#2F2F2F"
-            android:textColorHint="#999999"
-            android:textSize="15dp" />
+
 
     </android.support.design.widget.AppBarLayout>
 

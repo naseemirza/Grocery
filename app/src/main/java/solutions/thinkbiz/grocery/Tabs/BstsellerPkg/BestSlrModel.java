@@ -1,10 +1,10 @@
-package solutions.thinkbiz.grocery.DealsoftheDayPkg;
+package solutions.thinkbiz.grocery.Tabs.BstsellerPkg;
 
 /**
- * Created by User on 14-Feb-19.
+ * Created by User on 22-Feb-19.
  */
 
-public class DealsModel {
+public class BestSlrModel {
 
     private int mImageUrl;
     private String offtext;
@@ -12,7 +12,7 @@ public class DealsModel {
     private String mCurrency;
     private String mPrice;
 
-    public DealsModel(int mImageUrl, String offtext, String mName, String mCurrency, String mPrice) {
+    public BestSlrModel(int mImageUrl, String offtext, String mName, String mCurrency, String mPrice) {
         this.mImageUrl = mImageUrl;
         this.offtext = offtext;
         this.mName = mName;

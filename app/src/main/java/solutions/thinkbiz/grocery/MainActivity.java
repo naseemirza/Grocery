@@ -1,7 +1,9 @@
 package solutions.thinkbiz.grocery;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,21 +25,38 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import solutions.thinkbiz.grocery.BestsellerPkg.BestsellerActivity;
-import solutions.thinkbiz.grocery.DealsoftheDayPkg.DealsAdapter;
-import solutions.thinkbiz.grocery.DealsoftheDayPkg.DealsModel;
+import solutions.thinkbiz.grocery.Tabs.BstsellerPkg.BestSlrAdapter;
+import solutions.thinkbiz.grocery.Tabs.BstsellerPkg.BestSlrModel;
+import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsAdapter;
+import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsModel;
 import solutions.thinkbiz.grocery.ShopByPkg.ShopbyAdapter;
 import solutions.thinkbiz.grocery.ShopByPkg.ShopbyModel;
+import solutions.thinkbiz.grocery.Tabs.UnderEuroPkg.UndrAdapter;
+import solutions.thinkbiz.grocery.Tabs.UnderEuroPkg.UndrModel;
+import solutions.thinkbiz.grocery.Tabs.UptoOffPkg.UptoAdapter;
+import solutions.thinkbiz.grocery.Tabs.UptoOffPkg.UptoModel;
 import solutions.thinkbiz.grocery.TopOffersPkg.TopOffersAdapter;
 import solutions.thinkbiz.grocery.TopOffersPkg.TopOffersModel;
-import solutions.thinkbiz.grocery.UnderEuroPkg.UnderEuro1Activity;
-import solutions.thinkbiz.grocery.UptoPkg.UptoOffActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,15 +73,29 @@ public class MainActivity extends AppCompatActivity
 
 
     //Top Offers
-    List<TopOffersModel> productList;
-    RecyclerView recyclerView;
+    //List<TopOffersModel> productList;
+    //RecyclerView recyclerView;
+
+    private TopOffersAdapter mExampleAdapter1;
+    private ArrayList<TopOffersModel> productList;
+    private RequestQueue mRequestQueue1;
+    private RecyclerView recyclerView;
+
+
     //Shop by categories
     List<ShopbyModel> productList1;
     RecyclerView recyclerViewshp;
     //Dealas of the day
-    List<DealsModel> productListDeals;
-    RecyclerView recyclerViewDeals;
+    List<DealsModel> productListDeals = new ArrayList<>();
+    List<UndrModel> getProductLisUndr = new ArrayList<>();
+    List<UptoModel> productListupto = new ArrayList<>();
+    List<BestSlrModel> getProductLisbstslr = new ArrayList<>();
+    RecyclerView recyclerViewDeals, recyclerViewUndr, recyclerViewupto, recyclerViewbstslr;
 
+    Button textdls,textundr,textupto,textbstslr;
+
+   // TabLayout tabLayouttab;
+ //   ViewPager viewPagertab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,22 +112,22 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
        //
-        profilebtn=(ImageButton)findViewById(R.id.profile);
-        homebtn=(ImageButton)findViewById(R.id.home);
-        profilebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-        homebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        profilebtn=(ImageButton)findViewById(R.id.profile);
+//        homebtn=(ImageButton)findViewById(R.id.home);
+//        profilebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        homebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         Etext=(EditText)findViewById(R.id.etext);
         Etext.setOnClickListener(new View.OnClickListener() {
@@ -106,59 +140,39 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        undereuro=(Button)findViewById(R.id.undereuro);
-        uptooff=(Button)findViewById(R.id.upto);
-        bestseller=(Button)findViewById(R.id.bestslr);
-
-        undereuro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UnderEuro1Activity.class);
-                startActivity(intent);
-            }
-        });
-
-        uptooff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UptoOffActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        bestseller.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BestsellerActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
         //Top Offers
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false));
-        recyclerView.setHasFixedSize(true);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         productList = new ArrayList<>();
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
-        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        mRequestQueue1 = Volley.newRequestQueue(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false));
+        recyclerView.setHasFixedSize(true);
 
+        parseJSON1();
 
-        TopOffersAdapter adapter = new TopOffersAdapter(this, productList);
-        recyclerView.setAdapter(adapter);
+//        recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
+//        recyclerView.setLayoutManager(new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false));
+//        recyclerView.setHasFixedSize(true);
+//        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        productList = new ArrayList<>();
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//        productList.add(new TopOffersModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+//
+//
+//        TopOffersAdapter adapter = new TopOffersAdapter(this, productList);
+//        recyclerView.setAdapter(adapter);
 
         //Shop by categories
 
@@ -179,13 +193,19 @@ public class MainActivity extends AppCompatActivity
         ShopbyAdapter adapter1 = new ShopbyAdapter(this, productList1);
         recyclerViewshp.setAdapter(adapter1);
 
+        //Deals of the day Tab
+
+        textdls=(Button)findViewById(R.id.deals);
+        textundr=(Button)findViewById(R.id.undereuro);
+        textupto=(Button)findViewById(R.id.upto);
+        textbstslr=(Button)findViewById(R.id.bestslr);
+
         //Deals of the day
 
         recyclerViewDeals = (RecyclerView) findViewById(R.id.recyclerviewdealsa);
         recyclerViewDeals.setLayoutManager(new GridLayoutManager(this,3,GridLayoutManager.HORIZONTAL,false));
         recyclerViewDeals.setHasFixedSize(true);
 
-        productListDeals = new ArrayList<>();
         productListDeals.add(new DealsModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
         productListDeals.add(new DealsModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
         productListDeals.add(new DealsModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
@@ -196,9 +216,132 @@ public class MainActivity extends AppCompatActivity
         productListDeals.add(new DealsModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
         productListDeals.add(new DealsModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
 
-
-        DealsAdapter adapterD = new DealsAdapter(this, productListDeals);
+       final DealsAdapter adapterD = new DealsAdapter(this, productListDeals);
         recyclerViewDeals.setAdapter(adapterD);
+
+        textdls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewUndr.setVisibility(View.GONE);
+                recyclerViewupto.setVisibility(View.GONE);
+                recyclerViewbstslr.setVisibility(View.GONE);
+                recyclerViewDeals.setVisibility(View.VISIBLE);
+                recyclerViewDeals.setAdapter(adapterD);
+                textundr.setTextColor(getResources().getColor(R.color.colorBlack));
+                textupto.setTextColor(getResources().getColor(R.color.colorBlack));
+                textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
+                textdls.setTextColor(getResources().getColor(R.color.maincolor));
+            }
+        });
+
+
+
+        //Under Euro 1
+
+        recyclerViewUndr = (RecyclerView) findViewById(R.id.recyclerviewundr);
+        recyclerViewUndr.setLayoutManager(new GridLayoutManager(this,3,GridLayoutManager.HORIZONTAL,false));
+        recyclerViewUndr.setHasFixedSize(true);
+
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "20", "Bread & Cackes","€","90.00"));
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisUndr.add(new UndrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+
+        final UndrAdapter adapterUndr = new UndrAdapter(this, getProductLisUndr);
+         //recyclerViewUndr.setAdapter(adapterUndr);
+
+        textundr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewDeals.setVisibility(View.GONE);
+                recyclerViewupto.setVisibility(View.GONE);
+                recyclerViewbstslr.setVisibility(View.GONE);
+                recyclerViewUndr.setVisibility(View.VISIBLE);
+                recyclerViewUndr.setAdapter(adapterUndr);
+                textdls.setTextColor(getResources().getColor(R.color.colorBlack));
+                textupto.setTextColor(getResources().getColor(R.color.colorBlack));
+                textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
+                textundr.setTextColor(getResources().getColor(R.color.maincolor));
+
+            }
+        });
+
+
+        //Up to Off
+
+        recyclerViewupto = (RecyclerView) findViewById(R.id.recyclerviewupto);
+        recyclerViewupto.setLayoutManager(new GridLayoutManager(this,3,GridLayoutManager.HORIZONTAL,false));
+        recyclerViewupto.setHasFixedSize(true);
+
+        productListupto.add(new UptoModel(R.drawable.img11, "30", "Bread & Cackes","€","90.00"));
+        productListupto.add(new UptoModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        productListupto.add(new UptoModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        productListupto.add(new UptoModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        productListupto.add(new UptoModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        productListupto.add(new UptoModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        productListupto.add(new UptoModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        productListupto.add(new UptoModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        productListupto.add(new UptoModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+
+        final UptoAdapter adapterUpto = new UptoAdapter(this, productListupto);
+       // recyclerViewupto.setAdapter(adapterUpto);
+
+        textupto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewDeals.setVisibility(View.GONE);
+                recyclerViewUndr.setVisibility(View.GONE);
+                recyclerViewbstslr.setVisibility(View.GONE);
+                recyclerViewupto.setVisibility(View.VISIBLE);
+                recyclerViewupto.setAdapter(adapterUpto);
+                textdls.setTextColor(getResources().getColor(R.color.colorBlack));
+                textundr.setTextColor(getResources().getColor(R.color.colorBlack));
+                textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
+                textupto.setTextColor(getResources().getColor(R.color.maincolor));
+
+            }
+        });
+
+
+        //Best Seller
+
+        recyclerViewbstslr = (RecyclerView) findViewById(R.id.recyclerviewbstslr);
+        recyclerViewbstslr.setLayoutManager(new GridLayoutManager(this,3,GridLayoutManager.HORIZONTAL,false));
+        recyclerViewbstslr.setHasFixedSize(true);
+
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "40", "Bread & Cackes","€","90.00"));
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+        getProductLisbstslr.add(new BestSlrModel(R.drawable.img11, "10", "Bread & Cackes","€","90.00"));
+
+        final BestSlrAdapter adapterBest = new BestSlrAdapter(this, getProductLisbstslr);
+
+        textbstslr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewDeals.setVisibility(View.GONE);
+                recyclerViewUndr.setVisibility(View.GONE);
+                recyclerViewupto.setVisibility(View.GONE);
+                recyclerViewbstslr.setVisibility(View.VISIBLE);
+                recyclerViewbstslr.setAdapter(adapterBest);
+                textdls.setTextColor(getResources().getColor(R.color.colorBlack));
+                textundr.setTextColor(getResources().getColor(R.color.colorBlack));
+                textupto.setTextColor(getResources().getColor(R.color.colorBlack));
+                textbstslr.setTextColor(getResources().getColor(R.color.maincolor));
+
+            }
+        });
+
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -257,7 +400,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
+
 
     public class MyTimerTask extends TimerTask {
         @Override
@@ -296,46 +441,61 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    private void setupViewPager1(ViewPager viewPager1) {
-//        ViewPagerAdapter adapter1 = new ViewPagerAdapter(getSupportFragmentManager());
-//
-//        adapter1.addFragment(new DealsFrag(), "Deals of the day");
-//        adapter1.addFragment(new UnderEuro1Frag(), "Under Euro 1");
-//        adapter1.addFragment(new UpToFrag(), "Up to 50% Off");
-//        adapter1.addFragment(new BestSellerFrag(), "Bestseller");
-//
-//        viewPager1.setAdapter(adapter1);
-//    }
-//
-//    class ViewPagerAdapter extends FragmentPagerAdapter {
-//        private final List<Fragment> mFragmentList = new ArrayList<>();
-//        private final List<String> mFragmentTitleList = new ArrayList<>();
-//
-//        public ViewPagerAdapter(FragmentManager manager) {
-//            super(manager);
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//            return mFragmentList.get(position);
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return mFragmentList.size();
-//        }
-//
-//        public void addFragment(Fragment fragment, String title) {
-//            mFragmentList.add(fragment);
-//            mFragmentTitleList.add(title);
-//        }
-//
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            return mFragmentTitleList.get(position);
-//        }
-//    }
 
+    private void parseJSON1() {
+
+        //final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+       // progressBar.setVisibility(View.VISIBLE);
+         String topoffersURL="http://demotbs.com/dev/grocery/webservices/getAllProduct";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,topoffersURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                       // progressBar.setVisibility(View.INVISIBLE);
+
+                        try {
+                            Log.e("rootJsonArray",response);
+                            JSONArray rootJsonArray = new JSONArray(response);
+
+                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
+
+                            for (int i = 0; i < rootJsonArray.length(); i++) {
+                                JSONObject object = rootJsonArray.getJSONObject(i);
+
+                                productList.add(new TopOffersModel(object.optString("id"),
+                                        object.optString("main_image"),
+                                        object.optString("top_offer"),
+                                        object.optString("product_name"),
+                                        object.optString("currency"),
+                                        object.optString("product_special_price")));
+
+                            }
+
+                            Log.e("rootJsonArray",productList.size()+"");
+
+                            mExampleAdapter1 = new TopOffersAdapter(MainActivity.this, productList);
+                            recyclerView.setAdapter(mExampleAdapter1);
+                            mExampleAdapter1.notifyDataSetChanged();
+                            recyclerView.setHasFixedSize(true);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("TAg",error.getMessage());
+                    }
+                });
+
+        mRequestQueue1 = Volley.newRequestQueue(this);
+        mRequestQueue1.add(stringRequest);
+    }
 
 
     @Override
@@ -376,17 +536,29 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_logout) {
+
+           // startActivity(new Intent(MainActivity.this,LoginPageActivity.class));
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        }
+        else if (id == R.id.nav_aboutus) {
 
-        } else if (id == R.id.nav_slideshow) {
+//            String actname="About Us";
+//            SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor edit = pref.edit();
+//            edit.putString("Aboutus",actname);
+//            edit.apply();
+//            Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
+//            startActivity(intent);
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_history) {
+//            String actname="History";
+//            SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor edit = pref.edit();
+//            edit.putString("Actvname",actname);
+//            edit.apply();
+//            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+//            startActivity(intent);
 
         }
 

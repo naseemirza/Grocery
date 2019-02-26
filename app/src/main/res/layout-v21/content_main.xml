@@ -126,7 +126,7 @@
                         android:id="@+id/r1"
                         android:orientation="horizontal"
                         android:weightSum="4"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#ffffff">
 
@@ -145,43 +145,42 @@
                             android:layout_height="wrap_content" />
 
                         <Button
-                            android:id="@+id/undereuro"
-                            android:text="Under Euro € 1"
-                            android:padding="10dp"
-                            android:gravity="center_vertical|center_horizontal"
+                        android:id="@+id/undereuro"
+                        android:text="Under Euro € 1"
+                        android:paddingStart="10dp"
+                        android:gravity="center_vertical|center_horizontal"
                             android:stateListAnimator="@null"
-                            android:textSize="14sp"
-                            android:layout_weight="1"
-                            android:textAllCaps="false"
-                            android:background="@color/colorWhite"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        android:textSize="14sp"
+                        android:layout_weight="1"
+                        android:textAllCaps="false"
+                        android:background="@color/colorWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                         <Button
-                            android:id="@+id/upto"
-                            android:text="Up to 50% Off"
-                            android:padding="10dp"
-                            android:gravity="center_vertical|center_horizontal"
+                        android:id="@+id/upto"
+                        android:text="Up to 50% Off"
+                        android:paddingStart="10dp"
+                        android:gravity="center_vertical|center_horizontal"
                             android:stateListAnimator="@null"
-                            android:layout_weight="1"
-                            android:textSize="14sp"
-                            android:textAllCaps="false"
-                            android:background="@color/colorWhite"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"
+                        android:background="@color/colorWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                         <Button
-                            android:id="@+id/bestslr"
-                            android:text="Bestseller"
-                            android:padding="10dp"
-                            android:gravity="center_vertical|center_horizontal"
+                        android:id="@+id/bestslr"
+                        android:text="Bestseller"
+                        android:gravity="center_vertical|center_horizontal"
                             android:stateListAnimator="@null"
-                            android:layout_weight="1"
-                            android:textSize="14sp"
-                            android:textAllCaps="false"
-                            android:background="@color/colorWhite"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"
+                        android:background="@color/colorWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
 
                         </LinearLayout>
@@ -192,14 +191,18 @@
                     <RelativeLayout
                         android:id="@+id/redata"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
 
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerviewdealsa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="visible">
+                            android:layout_marginEnd="10dp"
+                            android:visibility="visible"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp">
 
                         </android.support.v7.widget.RecyclerView>
 
@@ -207,7 +210,11 @@
                             android:id="@+id/recyclerviewundr"
                             android:visibility="gone"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp">
 
                         </android.support.v7.widget.RecyclerView>
 
@@ -215,7 +222,11 @@
                             android:id="@+id/recyclerviewupto"
                             android:visibility="gone"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp">
 
                         </android.support.v7.widget.RecyclerView>
 
@@ -223,7 +234,11 @@
                             android:id="@+id/recyclerviewbstslr"
                             android:visibility="gone"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp">
 
                         </android.support.v7.widget.RecyclerView>
 

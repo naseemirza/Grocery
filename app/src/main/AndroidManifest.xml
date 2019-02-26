@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="solutions.thinkbiz.grocery">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,18 +30,26 @@
         <activity android:name=".EditTextActivity" />
         <activity
             android:name=".ProfileActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".UnderEuroPkg.UnderEuro1Activity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".ShopByPkg.AllCategActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".UptoPkg.UptoOffActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".ShopByPkg.ShopbyDetailsActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ShopByPkg.AllCategActivity"/>
         <activity
-            android:name=".BestsellerPkg.BestsellerActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".ShopByPkg.AllCategActivity" />
-        <activity android:name=".ShopByPkg.ShpByDetailActivity"></activity>
+            android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TopOffersPkg.TopOfferDetaillsActivity" />
+        <activity android:name=".Tabs.TabDetailsActivity"></activity>
     </application>
 
 </manifest>

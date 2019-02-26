@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import solutions.thinkbiz.grocery.R;
+import solutions.thinkbiz.grocery.RecyclerViewItemClickListener;
 
 /**
  * Created by User on 12-Feb-19.
@@ -50,7 +51,23 @@ public class ShopbyAdapter extends RecyclerView.Adapter<ShopbyAdapter.ProductVie
             holder.imageView.setImageResource(R.drawable.caticon);
             holder.textViewTitle1.setTextColor(Color.parseColor("#37b5e8"));
             holder.textViewTitle1.setText("All Categories");
-            //Intent intent=new Intent(mCtx,AllCategActivity.class);
+            holder.textViewTitle1.setTextSize(13);
+            holder.setItemClickListener(new RecyclerViewItemClickListener() {
+                @Override
+                public void onClick(View view, int position) {
+                    Intent intent = new Intent(view.getContext(), AllCategActivity.class);
+                    view.getContext().startActivity(intent);
+                }
+            });
+        }
+        else {
+            holder.setItemClickListener(new RecyclerViewItemClickListener() {
+                @Override
+                public void onClick(View view, int position) {
+                    Intent intent = new Intent(view.getContext(), ShopbyDetailsActivity.class);
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
 
     }
@@ -61,11 +78,14 @@ public class ShopbyAdapter extends RecyclerView.Adapter<ShopbyAdapter.ProductVie
     }
 
 
-    class ProductViewHolder extends RecyclerView.ViewHolder {
+    class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textViewTitle1;
        ImageView imageView;
        FrameLayout frameLayout;
+
+        private RecyclerViewItemClickListener itemClickListener;
+
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +93,19 @@ public class ShopbyAdapter extends RecyclerView.Adapter<ShopbyAdapter.ProductVie
             textViewTitle1 = itemView.findViewById(R.id.nameText);
             imageView = itemView.findViewById(R.id.shpbyimg);
             frameLayout =itemView.findViewById(R.id.imgcard);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            this.itemClickListener.onClick(v,getLayoutPosition());
+        }
+
+        public void setItemClickListener(RecyclerViewItemClickListener ic)
+        {
+            this.itemClickListener=ic;
+
         }
     }
 }

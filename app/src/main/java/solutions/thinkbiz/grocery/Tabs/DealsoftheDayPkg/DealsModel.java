@@ -1,41 +1,30 @@
-package solutions.thinkbiz.grocery.TopOffersPkg;
+package solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg;
 
 /**
- * Created by User on 12-Feb-19.
+ * Created by User on 14-Feb-19.
  */
 
-public class TopOffersModel {
+public class DealsModel {
 
-    private String id;
-    private String mImageUrl;
+    private int mImageUrl;
     private String offtext;
     private String mName;
     private String mCurrency;
     private String mPrice;
-    String image_path = "http://demotbs.com/dev/grocery//assets/uploads/product/";
 
-    public TopOffersModel(String id, String mImageUrl, String offtext, String mName, String mCurrency, String mPrice) {
-        this.id = id;
-        this.mImageUrl =image_path+mImageUrl;
+    public DealsModel(int mImageUrl, String offtext, String mName, String mCurrency, String mPrice) {
+        this.mImageUrl = mImageUrl;
         this.offtext = offtext;
         this.mName = mName;
         this.mCurrency = mCurrency;
         this.mPrice = mPrice;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getmImageUrl() {
+    public int getmImageUrl() {
         return mImageUrl;
     }
 
-    public void setmImageUrl(String mImageUrl) {
+    public void setmImageUrl(int mImageUrl) {
         this.mImageUrl = mImageUrl;
     }
 
