@@ -11,6 +11,7 @@
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#FFFF</color>
     <color name="gray">#DFDFDF</color>
+    <color name="lightgray">#FAFAFA</color>
     <color name="lightgreen">#a4c639</color>
     <color name="green">#5ec639</color>
     <color name="red"> #FF0000</color>

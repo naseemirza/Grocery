@@ -2,6 +2,7 @@ package solutions.thinkbiz.grocery.TopOffersPkg;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,16 +45,19 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
 
-        TopOffersModel product = productList.get(position);
+        final TopOffersModel product = productList.get(position);
 
+        String price=product.getmPrice();
+        String price1 = price.substring(0, price.indexOf("."));
         Currency currency = Currency.getInstance(product.getmCurrency());
-        String symbol = currency.getSymbol();
-       // Log.e("euro",symbol);
+        final String symbol = currency.getSymbol();
+        // Log.e("euro",price1);
 
         holder.textViewTitle.setText(product.getmName());
-        holder.textViewoff.setText(product.getOfftext());
+        holder.textViewoff.setText(product.getOfftext() + "%");
         holder.textViewpricetype.setText(symbol);
-        holder.textViewPrice.setText(" "+product.getmPrice());
+        //holder.textViewPrice.setText(" "+product.getmPrice());
+        holder.textViewPrice.setText(" "+price1);
       //  holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getmImageUrl()));
 
         Glide.with(mCtx)
@@ -65,6 +69,22 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
         holder.setItemClickListener(new RecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {
+
+                String prodID=product.getId();
+                String prodname=product.getmName();
+                String prodprice=product.getmPrice();
+                String descript = product.getDescr();
+                String imageurl=product.getmImageUrl();
+
+                SharedPreferences pref = view.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("image",imageurl);
+                edit.putString("pid",prodID);
+                edit.putString("name",prodname);
+                edit.putString("crncy",symbol);
+                edit.putString("price",prodprice);
+                edit.putString("Descr",descript);
+                edit.apply();
                 Intent intent = new Intent(view.getContext(), TopOfferDetaillsActivity.class);
                 view.getContext().startActivity(intent);
             }
@@ -77,8 +97,7 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
         return productList.size();
     }
 
-
-    class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+   public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
         TextView textViewTitle, textViewoff, textViewpricetype, textViewPrice;
         ImageView imageView;

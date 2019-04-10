@@ -12,6 +12,7 @@
     tools:context="solutions.thinkbiz.grocery.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+
         <ScrollView
             android:id="@+id/scrolview"
             android:layout_width="match_parent"
@@ -26,27 +27,34 @@
                     <RelativeLayout
                         android:id="@+id/re1"
                         android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:background="#DFDFDF">
+                        android:layout_height="170dp">
 
-                        <android.support.v4.view.ViewPager
-                            android:id="@+id/viewpager"
-                            android:layout_width="wrap_content"
-                            android:layout_height="170dp">
-
-                        </android.support.v4.view.ViewPager>
-
-                        <LinearLayout
-                            android:id="@+id/SliderDots"
+                        <ImageView
+                            android:id="@+id/imageView21"
+                            android:scaleType="fitXY"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal">
+                            android:layout_height="match_parent"
+                            android:src="@drawable/slider1" />
 
-                        </LinearLayout>
+
+                        <!--<android.support.v4.view.ViewPager-->
+                            <!--android:id="@+id/viewpager"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="170dp">-->
+
+                        <!--</android.support.v4.view.ViewPager>-->
+
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/SliderDots"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_marginBottom="8dp"-->
+                            <!--android:layout_marginTop="4dp"-->
+                            <!--android:gravity="center_horizontal"-->
+                            <!--android:orientation="horizontal">-->
+
+                        <!--</LinearLayout>-->
 
                     </RelativeLayout>
 
@@ -68,20 +76,20 @@
                         android:id="@+id/recyclerview1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/snap1"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_below="@id/snap1"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="5dp">
 
                     </android.support.v7.widget.RecyclerView>
 
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:visibility="gone" />
+                    <!--<ProgressBar-->
+                        <!--android:id="@+id/progressBar"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerHorizontal="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:visibility="gone" />-->
 
                     <TextView
                         android:id="@+id/snap2"
@@ -96,25 +104,74 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview2"
+                    <LinearLayout
+                        android:id="@+id/shpby"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@+id/snap2"
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                    </android.support.v7.widget.RecyclerView>
+                        <LinearLayout
+                            android:id="@+id/allcetg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
+                            <ImageButton
+                                android:id="@+id/allcateg"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shpbycard"
+                                android:padding="15dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/caticon" />
+
+                            <TextView
+                                android:id="@+id/textname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="All Categories"
+                                android:textColor="#37b5e8"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/shppcatrel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp">
+
+                        </android.support.v7.widget.RecyclerView>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/tabtext"
                         android:orientation="vertical"
-                        android:layout_below="@+id/recyclerview2"
-                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/shpby"
+                        android:layout_marginTop="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
+                        <!--<android.support.v7.widget.RecyclerView-->
+                            <!--android:id="@+id/recyclerviewtab"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent">-->
+
+                        <!--</android.support.v7.widget.RecyclerView>-->
 
                         <HorizontalScrollView
                             android:scrollbars="none"
@@ -123,12 +180,12 @@
 
 
                         <LinearLayout
-                        android:id="@+id/r1"
-                        android:orientation="horizontal"
-                        android:weightSum="4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#ffffff">
+                            android:id="@+id/r1"
+                            android:orientation="horizontal"
+                            android:weightSum="4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#ffffff">
 
                         <Button
                             android:id="@+id/deals"
@@ -141,46 +198,46 @@
                             android:textSize="14sp"
                             android:layout_weight="1"
                             android:background="@color/colorWhite"
-                            android:layout_width="wrap_content"
+                            android:layout_width="125dp"
                             android:layout_height="wrap_content" />
 
                         <Button
-                        android:id="@+id/undereuro"
-                        android:text="Under Euro € 1"
-                        android:paddingStart="10dp"
-                        android:gravity="center_vertical|center_horizontal"
+                            android:id="@+id/undereuro"
+                            android:text="Under Euro € 1"
+                            android:paddingStart="10dp"
+                            android:gravity="center_vertical|center_horizontal"
                             android:stateListAnimator="@null"
-                        android:textSize="14sp"
-                        android:layout_weight="1"
-                        android:textAllCaps="false"
-                        android:background="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                            android:textSize="14sp"
+                            android:layout_weight="1"
+                            android:textAllCaps="false"
+                            android:background="@color/colorWhite"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content" />
 
                         <Button
-                        android:id="@+id/upto"
-                        android:text="Up to 50% Off"
-                        android:paddingStart="10dp"
-                        android:gravity="center_vertical|center_horizontal"
+                            android:id="@+id/upto"
+                            android:text="Up to 50% Off"
+                            android:paddingStart="10dp"
+                            android:gravity="center_vertical|center_horizontal"
                             android:stateListAnimator="@null"
-                        android:layout_weight="1"
-                        android:textSize="14sp"
-                        android:textAllCaps="false"
-                        android:background="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                            android:layout_weight="1"
+                            android:textSize="14sp"
+                            android:textAllCaps="false"
+                            android:background="@color/colorWhite"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content" />
 
                         <Button
-                        android:id="@+id/bestslr"
-                        android:text="Bestseller"
-                        android:gravity="center_vertical|center_horizontal"
+                            android:id="@+id/bestslr"
+                            android:text="Bestseller"
+                            android:gravity="center_vertical|center_horizontal"
                             android:stateListAnimator="@null"
-                        android:layout_weight="1"
-                        android:textSize="14sp"
-                        android:textAllCaps="false"
-                        android:background="@color/colorWhite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                            android:layout_weight="1"
+                            android:textSize="14sp"
+                            android:textAllCaps="false"
+                            android:background="@color/colorWhite"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content" />
 
 
                         </LinearLayout>
@@ -198,56 +255,60 @@
                             android:id="@+id/recyclerviewdealsa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="5dp"
                             android:visibility="visible"
-                            android:layout_marginBottom="20dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp">
+                            android:layout_marginBottom="10dp">
 
                         </android.support.v7.widget.RecyclerView>
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerviewundr"
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="20dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp">
+                        <!--<android.support.v7.widget.RecyclerView-->
+                            <!--android:id="@+id/recyclerviewundr"-->
+                            <!--android:visibility="gone"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginEnd="10dp"-->
+                            <!--android:layout_marginBottom="20dp"-->
+                            <!--android:layout_marginStart="10dp"-->
+                            <!--android:layout_marginTop="10dp">-->
 
-                        </android.support.v7.widget.RecyclerView>
+                        <!--</android.support.v7.widget.RecyclerView>-->
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerviewupto"
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="20dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp">
+                        <!--<android.support.v7.widget.RecyclerView-->
+                            <!--android:id="@+id/recyclerviewupto"-->
+                            <!--android:visibility="gone"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginEnd="10dp"-->
+                            <!--android:layout_marginBottom="20dp"-->
+                            <!--android:layout_marginStart="10dp"-->
+                            <!--android:layout_marginTop="10dp">-->
 
-                        </android.support.v7.widget.RecyclerView>
+                        <!--</android.support.v7.widget.RecyclerView>-->
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerviewbstslr"
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="20dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp">
+                        <!--<android.support.v7.widget.RecyclerView-->
+                            <!--android:id="@+id/recyclerviewbstslr"-->
+                            <!--android:visibility="gone"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginEnd="10dp"-->
+                            <!--android:layout_marginBottom="20dp"-->
+                            <!--android:layout_marginStart="10dp"-->
+                            <!--android:layout_marginTop="10dp">-->
 
-                        </android.support.v7.widget.RecyclerView>
+                        <!--</android.support.v7.widget.RecyclerView>-->
 
                     </RelativeLayout>
 
                     </LinearLayout>
 
+
             </RelativeLayout>
 
+
+
         </ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>

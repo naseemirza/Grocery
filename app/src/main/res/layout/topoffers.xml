@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="2dp">
+    android:padding="1dp">
 
 <android.support.v7.widget.CardView
     android:layout_width="match_parent"
@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/imageview"
-                android:layout_width="80dp"
-                android:layout_height="110dp"
+                android:layout_width="60dp"
+                android:layout_height="90dp"
                 android:layout_gravity="center"
                 android:clickable="false"
                 android:scaleType="fitCenter"
@@ -43,8 +43,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:orientation="vertical">
 
@@ -68,26 +68,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/crncytxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:maxLines="1"
-                android:text="Price:"
-                android:textColor="@color/red"
-                android:textSize="12sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/crncytxt"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:clickable="false"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="Price:"-->
+                <!--android:textColor="@color/red"-->
+                <!--android:textSize="12sp" />-->
 
             <TextView
                 android:id="@+id/crncytype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:clickable="false"
                 android:maxLines="1"
                 android:text="€"
@@ -107,10 +104,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/offtextrounded"
                 android:orientation="horizontal"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
                 android:layout_marginStart="5dp"
                 android:padding="2dp">
 
@@ -119,16 +113,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10%"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="8sp" />
+                    android:textStyle="bold"
+                    android:textColor="@color/maincolor"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/offtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" OFF"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="8sp" />
+                    android:textColor="@color/maincolor"
+                    android:textStyle="bold"
+                    android:textSize="10sp" />
 
 
             </LinearLayout>

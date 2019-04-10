@@ -6,27 +6,38 @@ package solutions.thinkbiz.grocery.ShopByPkg;
 
 public class ShopbyModel {
 
-    private int Imagepath;
-    private String Name;
+    private String id;
+    private String mImageUrl;
+    private String mName;
+    String image_path = "http://demotbs.com/dev/grocery//assets/uploads/category/";
 
-    public ShopbyModel(int imagepath, String name) {
-        Imagepath = imagepath;
-        Name = name;
+    public ShopbyModel(String id, String mImageUrl, String mName) {
+        this.id = id;
+        this.mImageUrl =image_path+mImageUrl;
+        this.mName = mName;
     }
 
-    public int getImagepath() {
-        return Imagepath;
+    public String getId() {
+        return id;
     }
 
-    public void setImagepath(int imagepath) {
-        Imagepath = imagepath;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return Name;
+    public String getmImageUrl() {
+        return mImageUrl;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setmImageUrl(String mImageUrl) {
+        this.mImageUrl = mImageUrl;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 }

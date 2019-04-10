@@ -12,6 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.Currency;
 import java.util.List;
 
@@ -44,8 +47,14 @@ public class AllCatAdapter  extends RecyclerView.Adapter<AllCatAdapter.ProductVi
 
         ShopbyModel product = productList.get(position);
 
-        holder.textViewTitle1.setText(product.getName());
-        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getImagepath()));
+       // holder.textViewTitle1.setText(product.getName());
+      //  holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getImagepath()));
+        holder.textViewTitle1.setText(product.getmName());
+        Glide.with(mCtx)
+                .load(product.getmImageUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .fitCenter()
+                .into(holder.imageView);
 
         holder.setItemClickListener(new RecyclerViewItemClickListener() {
             @Override

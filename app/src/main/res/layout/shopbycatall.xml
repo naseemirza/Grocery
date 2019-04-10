@@ -16,7 +16,7 @@
             android:layout_width="35dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_launcher_background" />
 

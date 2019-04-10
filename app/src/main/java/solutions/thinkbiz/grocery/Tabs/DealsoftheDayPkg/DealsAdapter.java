@@ -2,6 +2,7 @@ package solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import java.util.Currency;
 import java.util.List;
 
 import solutions.thinkbiz.grocery.R;
 import solutions.thinkbiz.grocery.RecyclerViewItemClickListener;
 import solutions.thinkbiz.grocery.Tabs.TabDetailsActivity;
+import solutions.thinkbiz.grocery.TopOffersPkg.TopOfferDetaillsActivity;
 
 /**
  * Created by User on 14-Feb-19.
@@ -39,18 +45,46 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ProductViewH
     @Override
     public void onBindViewHolder(DealsAdapter.ProductViewHolder holder, int position) {
 
-        DealsModel product = productList.get(position);
+        final DealsModel product = productList.get(position);
+
+        String price=product.getmPrice();
+        String price1 = price.substring(0, price.indexOf("."));
+        Currency currency = Currency.getInstance(product.getmCurrency());
+        final String symbol = currency.getSymbol();
+        // Log.e("euro",symbol);
 
         holder.textViewTitle.setText(product.getmName());
         holder.textViewoff.setText(product.getOfftext());
-        holder.textViewpricetype.setText(product.getmCurrency());
-        holder.textViewPrice.setText(product.getmPrice());
-        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getmImageUrl()));
+        holder.textViewpricetype.setText(symbol);
+        holder.textViewPrice.setText(" "+price1);
+        //  holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getmImageUrl()));
+
+        Glide.with(mCtx)
+                .load(product.getmImageUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .fitCenter()
+                .into(holder.imageView);
 
         holder.setItemClickListener(new RecyclerViewItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent = new Intent(view.getContext(), TabDetailsActivity.class);
+
+                String prodID=product.getId();
+                String prodname=product.getmName();
+                String prodprice=product.getmPrice();
+                String descript = product.getDescr();
+                String imageurl=product.getmImageUrl();
+
+                SharedPreferences pref = view.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("image",imageurl);
+                edit.putString("pid",prodID);
+                edit.putString("name",prodname);
+                edit.putString("crncy",symbol);
+                edit.putString("price",prodprice);
+                edit.putString("Descr",descript);
+                edit.apply();
+                Intent intent = new Intent(view.getContext(), TopOfferDetaillsActivity.class);
                 view.getContext().startActivity(intent);
             }
         });

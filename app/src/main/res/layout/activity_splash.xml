@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:background="@color/maincolor"
+    android:gravity="center_vertical">
+
 
     <ImageView
-        android:id="@+id/logo_id"
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/slider1"/>
+        android:layout_height="90dp"
+        android:src="@drawable/logoscreen1" />
 
 
 </RelativeLayout>

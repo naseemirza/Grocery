@@ -10,9 +10,20 @@
             android:title="About Us" />
 
         <item
+            android:id="@+id/nav_cart"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="Cart" />
+
+        <item
             android:id="@+id/nav_history"
             android:icon="@drawable/historyicon"
             android:title="History" />
+
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_contact_phone_black_24dp"
+            android:title="Contact Us" />
+
 
         <item
             android:id="@+id/nav_logout"

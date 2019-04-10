@@ -1,7 +1,9 @@
 package solutions.thinkbiz.grocery;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -130,8 +132,8 @@ public class RegisterActivity extends AppCompatActivity {
         final String phone = editTextPhn.getText().toString().trim();
         final String password = editTextPass.getText().toString().trim();
 
-        String url="http://cableplus.superflexdirect.com/webservices/registration?";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,url ,
+        String url="http://demotbs.com/dev/grocery/webservices/registration?";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -145,6 +147,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                             if (success.equalsIgnoreCase("1"))
                             {
+
+                                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor edit = pref.edit();
+                                edit.putString("Myname",name);
+                                edit.putString("Myemail",email);
+                                edit.putString("Myphone",phone);
+                                edit.apply();
 
                                 Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));

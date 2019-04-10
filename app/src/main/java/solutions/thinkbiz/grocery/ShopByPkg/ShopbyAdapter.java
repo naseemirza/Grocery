@@ -2,9 +2,11 @@ package solutions.thinkbiz.grocery.ShopByPkg;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +14,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 
 import solutions.thinkbiz.grocery.R;
 import solutions.thinkbiz.grocery.RecyclerViewItemClickListener;
+import solutions.thinkbiz.grocery.TopOffersPkg.TopOfferDetaillsActivity;
 
 /**
  * Created by User on 12-Feb-19.
@@ -39,36 +45,35 @@ public class ShopbyAdapter extends RecyclerView.Adapter<ShopbyAdapter.ProductVie
     }
 
     @Override
-    public void onBindViewHolder(ShopbyAdapter.ProductViewHolder holder, int position) {
+    public void onBindViewHolder(ShopbyAdapter.ProductViewHolder holder, final int position) {
 
-        ShopbyModel product = productList.get(position);
+         final ShopbyModel product = productList.get(position);
 
-        holder.textViewTitle1.setText(product.getName());
-        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getImagepath()));
+         String name=product.getmName();
 
-        if (position==0){
-            holder.frameLayout.setBackgroundResource(R.drawable.shpbycard);
-            holder.imageView.setImageResource(R.drawable.caticon);
-            holder.textViewTitle1.setTextColor(Color.parseColor("#37b5e8"));
-            holder.textViewTitle1.setText("All Categories");
-            holder.textViewTitle1.setTextSize(13);
-            holder.setItemClickListener(new RecyclerViewItemClickListener() {
-                @Override
-                public void onClick(View view, int position) {
-                    Intent intent = new Intent(view.getContext(), AllCategActivity.class);
-                    view.getContext().startActivity(intent);
-                }
-            });
-        }
-        else {
-            holder.setItemClickListener(new RecyclerViewItemClickListener() {
-                @Override
-                public void onClick(View view, int position) {
-                    Intent intent = new Intent(view.getContext(), ShopbyDetailsActivity.class);
-                    view.getContext().startActivity(intent);
-                }
-            });
-        }
+        holder.textViewTitle1.setText(name);
+
+
+        Glide.with(mCtx)
+                    .load(product.getmImageUrl())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .fitCenter()
+                    .into(holder.imageView);
+
+        holder.setItemClickListener(new RecyclerViewItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                String prodID=product.getId();
+
+                SharedPreferences pref = view.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("pid",prodID);
+                edit.apply();
+                Intent intent = new Intent(view.getContext(), ShopbyDetailsActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
 
     }
 

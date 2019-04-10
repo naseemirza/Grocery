@@ -1,9 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="solutions.thinkbiz.grocery.EditTextActivity">
+    android:orientation="vertical"
+    >
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#FFFF">
+
+        <ImageButton
+            android:id="@+id/bachbtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="3dp"
+            android:background="#FFFF"
+            android:src="@drawable/ic_arrow_back_black_24dp">
+
+        </ImageButton>
+
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView1"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:backgroundTint="@android:color/transparent"
+            android:completionThreshold="1"
+            android:cursorVisible="true"
+            android:clickable="true"
+            android:hint="Search for products"
+            android:paddingStart="5dp"
+            android:textAllCaps="false"
+            android:textCursorDrawable="@color/colorBlack">
+
+            <requestFocus />
+        </AutoCompleteTextView>
+
+        <ImageView
+            android:id="@+id/imageViewsrch"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:layout_toLeftOf="@+id/imageView1"
+            android:src="@drawable/ic_search_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:layout_toEndOf="@+id/autoCompleteTextView1"
+            android:src="@drawable/ic_close_black_24dp" />
+
+    </RelativeLayout>
+
+
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardcategory"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:text="CATEGORIES MATCHES"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/similartext"
+        android:layout_marginTop="10dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+</LinearLayout>

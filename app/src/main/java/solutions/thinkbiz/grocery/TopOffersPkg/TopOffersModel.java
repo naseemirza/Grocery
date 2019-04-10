@@ -12,15 +12,17 @@ public class TopOffersModel {
     private String mName;
     private String mCurrency;
     private String mPrice;
+    private String descr;
     String image_path = "http://demotbs.com/dev/grocery//assets/uploads/product/";
 
-    public TopOffersModel(String id, String mImageUrl, String offtext, String mName, String mCurrency, String mPrice) {
+    public TopOffersModel(String id, String mImageUrl, String offtext, String mName, String mCurrency, String mPrice, String descr) {
         this.id = id;
         this.mImageUrl =image_path+mImageUrl;
         this.offtext = offtext;
         this.mName = mName;
         this.mCurrency = mCurrency;
         this.mPrice = mPrice;
+        this.descr = descr;
     }
 
     public String getId() {
@@ -69,5 +71,13 @@ public class TopOffersModel {
 
     public void setmPrice(String mPrice) {
         this.mPrice = mPrice;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
     }
 }
