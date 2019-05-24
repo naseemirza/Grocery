@@ -30,7 +30,7 @@ import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsModel;
 
 public class ShopbyDetailsActivity extends AppCompatActivity {
 
-    String prdid;
+    String prdid,prdname;
 
     private DealsAdapter mExampleAdapterDls;
     private ArrayList<DealsModel> productListDls;
@@ -44,11 +44,12 @@ public class ShopbyDetailsActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        getSupportActionBar().setTitle("Product detail");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         prdid = pref.getString("pid", "");
+        prdname = pref.getString("pname", "");
+
+        getSupportActionBar().setTitle(prdname);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         productListDls = new ArrayList<>();
         mRequestQueueDls = Volley.newRequestQueue(this);
@@ -62,8 +63,8 @@ public class ShopbyDetailsActivity extends AppCompatActivity {
 
     private void parseJSONDeals() {
 
-        String url=" http://demotbs.com/dev/grocery/webservices/productBycategory?id="+prdid;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        //String url="http://demotbs.com/dev/grocery/webservices/productBycategory?id="+prdid;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, AllURLs.Shopby_details+prdid,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -82,7 +83,7 @@ public class ShopbyDetailsActivity extends AppCompatActivity {
 
                                 productListDls.add(new DealsModel(object.optString("id"),
                                         object.optString("main_image"),
-                                        object.optString("top_offer"),
+                                        object.optString("offer_percent"),
                                         object.optString("product_name"),
                                         object.optString("currency"),
                                         object.optString("product_special_price"),
@@ -99,7 +100,6 @@ public class ShopbyDetailsActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 },
                 new Response.ErrorListener() {

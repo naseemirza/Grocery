@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     Button buttonLogn;
     ProgressDialog progressDialog;
     public static Boolean booltype;
+    public static Boolean ads;
     ImageView Lognimg;
     String name;
 
@@ -57,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         booltype=pref.getBoolean("Booltype", Boolean.parseBoolean(""));
         name = pref.getString("Myname", "");
-
 
         if(booltype){
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             String msg=obj.getString("login_image");
-                            String path="http://demotbs.com/dev/grocery/assets/uploads/logo/"+msg;
+                            String path="http://demotbs.com/dev/grocery/assets/editor_upload_images/image/"+msg;
                             Log.e("Response", path);
                             Glide.with(getApplicationContext())
                                     .load(path)
@@ -239,6 +239,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (success.equalsIgnoreCase("1"))
                             {
                                 booltype=true;
+                                ads=true;
                                 SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor edit = pref.edit();
                                 edit.putString("Myname",name);
@@ -246,6 +247,7 @@ public class LoginActivity extends AppCompatActivity {
                                // edit.putString("name",name);
                                 edit.putString("email",email);
                                 edit.putBoolean("Booltype",booltype);
+                                edit.putBoolean("Booltype1",ads);
                                // edit.putString("phone",phone);
 
                                 Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();

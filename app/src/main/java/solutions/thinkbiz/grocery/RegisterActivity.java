@@ -62,12 +62,10 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     Regst();
                 }
-
             }
         });
 
     }
-
     private boolean isValidate()
     {
         final String email = editTextEmail.getText().toString().trim();

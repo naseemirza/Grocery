@@ -94,7 +94,7 @@ public class EditTextActivity extends AppCompatActivity {
 
     private void parseJSON() {
 
-        String url="   http://demotbs.com/dev/grocery/webservices/searchdata?search="+pname;
+        String url="http://demotbs.com/dev/grocery/webservices/searchdata?search="+pname;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

@@ -91,7 +91,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
                     @Override
                     public void onClick(View v) {
 
-
                 long result =  ((CheckOutActivity)mCtx).AddMethod(cartID, Integer.parseInt(qunty.getText().toString()));
                 if (result == 1) {
                     holder.textViewQty.setText(qunty.getText().toString());

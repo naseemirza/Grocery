@@ -38,7 +38,7 @@ public class ForgetPassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_pass);
 
-        getSupportActionBar().setTitle("Reset Password");
+        getSupportActionBar().setTitle("Forgot Password");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editText=(EditText)findViewById(R.id.editTextU);
@@ -78,7 +78,7 @@ public class ForgetPassActivity extends AppCompatActivity {
     private void FogotPass() {
 
         progressDialog = new ProgressDialog(ForgetPassActivity.this);
-        progressDialog.setMessage("Signing In...");
+        progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
         final String email = editText.getText().toString().trim();
@@ -103,8 +103,8 @@ public class ForgetPassActivity extends AppCompatActivity {
                             {
                                 Toast.makeText(ForgetPassActivity.this, msg, Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
-                               // Intent intent=new Intent(ForgetPassActivity.this, MainActivity.class);
-                               // startActivity(intent);
+                                Intent intent=new Intent(ForgetPassActivity.this, LoginActivity.class);
+                                startActivity(intent);
                                 editText.setText("");
 
                             }

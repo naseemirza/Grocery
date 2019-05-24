@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,16 +49,19 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ProductViewH
 
         final DealsModel product = productList.get(position);
 
-        String price=product.getmPrice();
-        String price1 = price.substring(0, price.indexOf("."));
+       // String val= String.valueOf(Html.fromHtml(product.getmPrice()));
+       // String val1=val.substring(0,val.indexOf("."));
+       // String price=product.getmPrice();
+       // String price1 = price.substring(0, price.indexOf("."));
         Currency currency = Currency.getInstance(product.getmCurrency());
         final String symbol = currency.getSymbol();
-        // Log.e("euro",symbol);
+
+        //Log.e("euro",val);
 
         holder.textViewTitle.setText(product.getmName());
-        holder.textViewoff.setText(product.getOfftext());
-        holder.textViewpricetype.setText(symbol);
-        holder.textViewPrice.setText(" "+price1);
+        holder.textViewoff.setText(product.getOfftext() + "%");
+        holder.textViewpricetype.setText(symbol+" ");
+        holder.textViewPrice.setText(product.getmPrice());
         //  holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getmImageUrl()));
 
         Glide.with(mCtx)

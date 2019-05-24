@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<TextView
+android:id="@+id/textvw1"
+android:layout_width="match_parent"
+android:layout_height="40dp"
+android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp"
+android:text="Select date and Time for Collect in Store"
+android:textAlignment="center"
+android:gravity="center_vertical"
+android:textAllCaps="false"
+android:textColor="@color/maincolor"
+android:textSize="18sp" />
+
+
+    <EditText
+        android:id="@+id/set_date"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textvw1"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:backgroundTint="@color/maincolor"
+        android:textCursorDrawable="@color/colorBlack" />
+
+<Button
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Select Date"
+android:id="@+id/selectdate"
+    android:textAllCaps="false"
+    android:background="@color/maincolor"
+    android:textColor="@color/colorWhite"
+android:layout_alignBottom="@+id/set_date"
+android:layout_toRightOf="@+id/set_date"
+android:layout_toEndOf="@+id/set_date" />
+
+    <EditText
+        android:id="@+id/set_time"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/set_date"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:backgroundTint="@color/maincolor"
+        android:gravity="center"
+        android:textCursorDrawable="@color/colorBlack" />
+
+<Button
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Select Time"
+android:id="@+id/selecttime"
+    android:background="@color/maincolor"
+    android:textColor="@color/colorWhite"
+    android:layout_marginTop="20dp"
+    android:textAllCaps="false"
+android:layout_below="@+id/selectdate"
+android:layout_alignLeft="@+id/selectdate"
+android:layout_alignStart="@+id/selectdate" />
+
+
+    <Button
+        android:id="@+id/buttonSt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/selecttime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/maincolor"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

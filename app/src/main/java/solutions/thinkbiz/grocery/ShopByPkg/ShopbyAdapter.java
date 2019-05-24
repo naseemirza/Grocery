@@ -65,10 +65,12 @@ public class ShopbyAdapter extends RecyclerView.Adapter<ShopbyAdapter.ProductVie
             public void onClick(View view, int position) {
 
                 String prodID=product.getId();
+                String prdname=product.getmName();
 
                 SharedPreferences pref = view.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit = pref.edit();
                 edit.putString("pid",prodID);
+                edit.putString("pname",prdname);
                 edit.apply();
                 Intent intent = new Intent(view.getContext(), ShopbyDetailsActivity.class);
                 view.getContext().startActivity(intent);

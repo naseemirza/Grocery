@@ -1,15 +1,11 @@
 package solutions.thinkbiz.grocery;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +16,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +31,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,22 +39,16 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import solutions.thinkbiz.grocery.Checkout.CheckOutActivity;
-import solutions.thinkbiz.grocery.Checkout.OrderAdapter;
-import solutions.thinkbiz.grocery.Checkout.OrderModel;
+import solutions.thinkbiz.grocery.History.HistoryActivity;
+import solutions.thinkbiz.grocery.History.HistoryListActivity;
 import solutions.thinkbiz.grocery.ShopByPkg.AllCategActivity;
 import solutions.thinkbiz.grocery.Tabs.BstsellerPkg.BestSlrAdapter;
 import solutions.thinkbiz.grocery.Tabs.BstsellerPkg.BestSlrModel;
@@ -74,7 +62,10 @@ import solutions.thinkbiz.grocery.Tabs.UptoOffPkg.UptoAdapter;
 import solutions.thinkbiz.grocery.Tabs.UptoOffPkg.UptoModel;
 import solutions.thinkbiz.grocery.TopOffersPkg.TopOffersAdapter;
 import solutions.thinkbiz.grocery.TopOffersPkg.TopOffersModel;
+import solutions.thinkbiz.grocery.TopOffersPkg.ViewAllTopOfferseActivity;
+
 import static solutions.thinkbiz.grocery.LoginActivity.booltype;
+import static solutions.thinkbiz.grocery.LoginActivity.ads;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -85,26 +76,11 @@ public class MainActivity extends AppCompatActivity
     Button undereuro,uptooff,bestseller;
     private static ProgressDialog mProgressDialog;
 
-//    ViewPager viewPager;
-//    LinearLayout sliderDotspanel;
-//    private int dotscount;
-//    private ImageView[] dots;
-
-    //Tab name
-
-//    private TabAdapter mExampleAdaptertab;
-//    private ArrayList<TabModel> mExampleListtab;
-//    private RequestQueue mRequestQueuetab;
-//    private RecyclerView mRecyclerviewtab;
-
     private TopOffersAdapter mExampleAdapter1;
     private ArrayList<TopOffersModel> productList;
     private RequestQueue mRequestQueue1;
     private RecyclerView recyclerView;
 
-    //Shop by categories
-   // List<ShopbyModel> productList1;
-   // RecyclerView recyclerViewshp;
 
     private ShopbyAdapter mExampleAdapterSB;
     private ArrayList<ShopbyModel> productListSB;
@@ -116,6 +92,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<DealsModel> productListDls;
     private RequestQueue mRequestQueueDls;
     private RecyclerView recyclerViewDeals;
+
 
 //    // Under Euro 1
       private UndrAdapter mExampleAdapterUndr;
@@ -141,6 +118,8 @@ public class MainActivity extends AppCompatActivity
     TextView textViewname;
     RelativeLayout CartBtn;
 
+    TextView textvall;
+
     Dialog dialog;
     String userId;
     TextView CartItem;
@@ -162,6 +141,7 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         booltype=pref.getBoolean("Booltype", Boolean.parseBoolean(""));
+        ads=pref.getBoolean("Booltype1", Boolean.parseBoolean(""));
         uemail = pref.getString("email", "");
         userId = pref.getString("user_id", "");
 
@@ -169,37 +149,17 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
         //Advertisement
+        //ads=false;
 
+           if (ads) {
+               ImageView advrtise = (ImageView) findViewById(R.id.adsimg);
+               openDailyInventoryBottomSheet();
+           }
 
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            LayoutInflater inflater = getLayoutInflater();
-//            final View dialogLayout = inflater.inflate(R.layout.popup, null); //dialog_img
-//            builder.setPositiveButton("OK", null);
-//            builder.setView(dialogLayout);
-//            builder.show();
+       //   Log.e("ads", String.valueOf(ads));
 
-
-        ImageView advrtise=(ImageView)findViewById(R.id.adsimg);
-        openDailyInventoryBottomSheet();
-//        AdvertiseImage();
-//
-//        dialog = new Dialog(MainActivity.this);
-//        dialog.setContentView(R.layout.popup);
-//        dialog.getWindow().setDimAmount(0.7f);
-//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//        dialog.show();
-//        ImageView imageView=dialog.findViewById(R.id.cancel);
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-
-
-        DealsTabName();
+       // DealsTabName();
 
          banner=(ImageView)findViewById(R.id.imageView21);
         mainImage();
@@ -215,17 +175,11 @@ public class MainActivity extends AppCompatActivity
 
         CartItem=(TextView) findViewById(R.id.cartcounter);
         getCount();
-      //  CartItem.setText(String.valueOf(countitem));
-
-     //   Log.e("items", String.valueOf(countitem));
 
         CartBtn=(RelativeLayout)findViewById(R.id.CartRltv);
         CartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-              //  Intent intent = new Intent(MainActivity.this, CheckOutActivity.class);
-                //    startActivity(intent);
 
                 if ((contr+countitem)>0){
                     String actname="My Cart";
@@ -246,12 +200,19 @@ public class MainActivity extends AppCompatActivity
         Etext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(MainActivity.this, EditTextActivity.class);
                 startActivity(intent);
             }
         });
 
+        textvall=(TextView)findViewById(R.id.textVall);
+        textvall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ViewAllTopOfferseActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //Top Offers
 
@@ -263,18 +224,6 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
 
         parseJSON1();
-
-
-        // Tab name
-
-//        mExampleListtab = new ArrayList<>();
-//        mRequestQueuetab = Volley.newRequestQueue(this);
-//        mRecyclerviewtab=(RecyclerView)findViewById(R.id.recyclerviewtab);
-//        mRecyclerviewtab.setNestedScrollingEnabled(false);
-//        mRecyclerviewtab.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-//        mRecyclerviewtab.setHasFixedSize(true);
-//
-//        parseJSONTab();
 
         //Shop by categories
 
@@ -292,7 +241,7 @@ public class MainActivity extends AppCompatActivity
 
         textdls=(Button)findViewById(R.id.deals);
         textundr=(Button)findViewById(R.id.undereuro);
-        textupto=(Button)findViewById(R.id.upto);
+      // textupto=(Button)findViewById(R.id.upto);
         textbstslr=(Button)findViewById(R.id.bestslr);
 
         //Deals of the day
@@ -311,12 +260,11 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 parseJSONDeals();
                 textundr.setTextColor(getResources().getColor(R.color.colorBlack));
-                textupto.setTextColor(getResources().getColor(R.color.colorBlack));
+               // textupto.setTextColor(getResources().getColor(R.color.colorBlack));
                 textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
                 textdls.setTextColor(getResources().getColor(R.color.maincolor));
             }
         });
-
 
         //Under Euro 1
 
@@ -325,7 +273,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 parseJSONUndr();
                 textdls.setTextColor(getResources().getColor(R.color.colorBlack));
-                textupto.setTextColor(getResources().getColor(R.color.colorBlack));
+                //textupto.setTextColor(getResources().getColor(R.color.colorBlack));
                 textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
                 textundr.setTextColor(getResources().getColor(R.color.maincolor));
 
@@ -335,17 +283,17 @@ public class MainActivity extends AppCompatActivity
 
         //Up to Off
 
-        textupto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                parseJSONUpto();
-                textdls.setTextColor(getResources().getColor(R.color.colorBlack));
-                textundr.setTextColor(getResources().getColor(R.color.colorBlack));
-                textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
-                textupto.setTextColor(getResources().getColor(R.color.maincolor));
-
-            }
-        });
+//        textupto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                parseJSONUpto();
+//                textdls.setTextColor(getResources().getColor(R.color.colorBlack));
+//                textundr.setTextColor(getResources().getColor(R.color.colorBlack));
+//                textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
+//                textupto.setTextColor(getResources().getColor(R.color.maincolor));
+//
+//            }
+//        });
 
 
         //Best Seller
@@ -356,7 +304,7 @@ public class MainActivity extends AppCompatActivity
                 parseJSONBstslr();
                 textdls.setTextColor(getResources().getColor(R.color.colorBlack));
                 textundr.setTextColor(getResources().getColor(R.color.colorBlack));
-                textupto.setTextColor(getResources().getColor(R.color.colorBlack));
+               // textupto.setTextColor(getResources().getColor(R.color.colorBlack));
                 textbstslr.setTextColor(getResources().getColor(R.color.maincolor));
 
             }
@@ -375,51 +323,51 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void DealsTabName() {
-
-            String url="http://demotbs.com/dev/grocery/webservices/deals_tab";
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            JSONArray rootJsonArray = new JSONArray(response);
-
-                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
-
-                            for (int i = 0; i < rootJsonArray.length(); i++) {
-                                JSONObject obj = rootJsonArray.getJSONObject(i);
-
-                                String delas=obj.getString("first_field");
-                                String underEuro=obj.getString("second_field");
-                                String upto=obj.getString("third_field");
-                                String bestsller=obj.getString("fourth_field");
-                                // Log.e("dls", delas);
-
-                                textdls.setText(delas);
-                                textundr.setText(underEuro);
-                                textupto.setText(upto);
-                                textbstslr.setText(bestsller);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-
-                        Log.e("TAg",error.getMessage());
-                    }
-                });
-
-              RequestQueue queue2 = Volley.newRequestQueue(MainActivity.this);
-              queue2.add(stringRequest);
-        }
+//    private void DealsTabName() {
+//
+//            String url="http://demotbs.com/dev/grocery/webservices/deals_tab";
+//            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//
+//                        try {
+//                            JSONArray rootJsonArray = new JSONArray(response);
+//
+//                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
+//
+//                            for (int i = 0; i < rootJsonArray.length(); i++) {
+//                                JSONObject obj = rootJsonArray.getJSONObject(i);
+//
+//                                String delas=obj.getString("first_field");
+//                                String underEuro=obj.getString("second_field");
+//                                String upto=obj.getString("third_field");
+//                                String bestsller=obj.getString("fourth_field");
+//                                // Log.e("dls", delas);
+//
+//                                textdls.setText(delas);
+//                                textundr.setText(underEuro);
+//                                //textupto.setText(upto);
+//                                textbstslr.setText(bestsller);
+//                            }
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                        Log.e("TAg",error.getMessage());
+//                    }
+//                });
+//
+//              RequestQueue queue2 = Volley.newRequestQueue(MainActivity.this);
+//              queue2.add(stringRequest);
+//        }
 
     private void openDailyInventoryBottomSheet() {
 
@@ -437,6 +385,12 @@ public class MainActivity extends AppCompatActivity
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ads=false;
+                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putBoolean("Booltype1",ads);
+                edit.apply();
+               // startActivity(new Intent(MainActivity.this,MainActivity.class));
                 mBottomSheetDialog.dismiss();
             }
         });
@@ -455,13 +409,13 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onResponse(String response) {
 
-                          Log.e("Response", response);
+                          //Log.e("Response", response);
 
                         try {
                             JSONObject obj = new JSONObject(response);
                             String msg=obj.getString("advertise_image");
                             String path="http://demotbs.com/dev/grocery/assets/uploads/advertise_image/"+msg;
-//                            Log.e("Response", path);
+                            Log.e("Response", path);
 
                             Glide.with(MainActivity.this)
                                     .load(path)
@@ -489,46 +443,6 @@ public class MainActivity extends AppCompatActivity
         queue2.add(stringRequest);
     }
 
-//    public static void removeSimpleProgressDialog() {
-//        try {
-//            if (mProgressDialog != null) {
-//                if (mProgressDialog.isShowing()) {
-//                    mProgressDialog.dismiss();
-//                    mProgressDialog = null;
-//                }
-//            }
-//        } catch (IllegalArgumentException ie) {
-//            ie.printStackTrace();
-//
-//        } catch (RuntimeException re) {
-//            re.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
-//    public static void showSimpleProgressDialog(Context context, String title,
-//                                                String msg, boolean isCancelable) {
-//        try {
-//            if (mProgressDialog == null) {
-//                mProgressDialog = ProgressDialog.show(context, title, msg);
-//                mProgressDialog.setCancelable(isCancelable);
-//            }
-//
-//            if (!mProgressDialog.isShowing()) {
-//                mProgressDialog.show();
-//            }
-//
-//        } catch (IllegalArgumentException ie) {
-//            ie.printStackTrace();
-//        } catch (RuntimeException re) {
-//            re.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     private void mainImage() {
 
         String url="http://demotbs.com/dev/grocery/webservices/main_image";
@@ -542,8 +456,8 @@ public class MainActivity extends AppCompatActivity
                         try {
                             JSONObject obj = new JSONObject(response);
                             String msg=obj.getString("main_image");
-                            String path="http://demotbs.com/dev/grocery/assets/uploads/banner/"+msg;
-                            Log.e("Response", path);
+                            String path="http://demotbs.com/dev/grocery/assets/uploads/slider/"+msg;
+                        //    Log.e("Response", path);
 
                             Glide.with(MainActivity.this)
                                     .load(path)
@@ -596,51 +510,17 @@ public class MainActivity extends AppCompatActivity
         mRequestQueue2.add(stringRequest);
     }
 
-//    public class MyTimerTask extends TimerTask {
-//        @Override
-//        public void run() {
-//            MainActivity.this.runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if (viewPager.getCurrentItem()==0){
-//                        viewPager.setCurrentItem(1);
-//                    }
-//                    else if(viewPager.getCurrentItem()==1){
-//                        viewPager.setCurrentItem(2);
-//                    }
-//                    else if(viewPager.getCurrentItem()==2){
-//                        viewPager.setCurrentItem(3);
-//                    }
-//                    else if(viewPager.getCurrentItem()==3){
-//                        viewPager.setCurrentItem(4);
-//                    }
-//                    else if(viewPager.getCurrentItem()==4){
-//                        viewPager.setCurrentItem(5);
-//                    }
-//                    else if(viewPager.getCurrentItem()==5){
-//                        viewPager.setCurrentItem(6);
-//                    }
-//                    else if(viewPager.getCurrentItem()==6){
-//                        viewPager.setCurrentItem(7);
-//                    }
-//                    else {
-//                        viewPager.setCurrentItem(0);
-//                    }
-//
-//
-//                }
-//            });
-//        }
-//    }
-
     private void parseJSON1() {
+
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,AllURLs.TOP_OFFERS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                       // progressBar.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
 
                         try {
                             Log.e("rootJsonArray",response);
@@ -655,7 +535,7 @@ public class MainActivity extends AppCompatActivity
 
                                 productList.add(new TopOffersModel(object.optString("id"),
                                         object.optString("main_image"),
-                                        object.optString("top_offer"),
+                                        object.optString("offer_percent"),
                                         object.optString("product_name"),
                                         object.optString("currency"),
                                         object.optString("product_special_price"),
@@ -688,53 +568,6 @@ public class MainActivity extends AppCompatActivity
         mRequestQueue1.add(stringRequest);
     }
 
-
-//    private void parseJSONTab() {
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET,AllURLs.SHOP_BY_CATEGORY,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//
-//                        try {
-//                            Log.e("rootJsonArray",response);
-//                            JSONArray rootJsonArray = new JSONArray(response);
-//
-//                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
-//
-//                            for (int i = 0; i < rootJsonArray.length(); i++) {
-//                                JSONObject object = rootJsonArray.getJSONObject(i);
-//
-//                                mExampleListtab.add(new TabModel(object.optString("id"),
-//                                        object.optString("category_name")));
-//                            }
-//
-//                            Log.e("rootJsonArray",productListSB.size()+"");
-//
-//                            mExampleAdaptertab = new TabAdapter(MainActivity.this, mExampleListtab);
-//                            mRecyclerviewtab.setAdapter(mExampleAdaptertab);
-//                            mExampleAdaptertab.notifyDataSetChanged();
-//                            mRecyclerviewtab.setHasFixedSize(true);
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//                        Log.e("TAg",error.getMessage());
-//                    }
-//                });
-//
-//        mRequestQueuetab = Volley.newRequestQueue(this);
-//        mRequestQueuetab.add(stringRequest);
-
-
-   // }
-
     private void parseJSON2() {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,AllURLs.SHOP_BY_CATEGORY,
@@ -757,7 +590,6 @@ public class MainActivity extends AppCompatActivity
                                         object.optString("category_image"),
                                         object.optString("category_name")));
                             }
-
                             Log.e("rootJsonArray",productListSB.size()+"");
 
                             mExampleAdapterSB = new ShopbyAdapter(MainActivity.this, productListSB);
@@ -768,7 +600,6 @@ public class MainActivity extends AppCompatActivity
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -803,7 +634,7 @@ public class MainActivity extends AppCompatActivity
 
                                 productListDls.add(new DealsModel(object.optString("id"),
                                         object.optString("main_image"),
-                                        object.optString("top_offer"),
+                                        object.optString("offer_percent"),
                                         object.optString("product_name"),
                                         object.optString("currency"),
                                         object.optString("product_special_price"),
@@ -855,7 +686,7 @@ public class MainActivity extends AppCompatActivity
 
                                 productListDls.add(new DealsModel(object.optString("id"),
                                         object.optString("main_image"),
-                                        object.optString("top_offer"),
+                                        object.optString("offer_percent"),
                                         object.optString("product_name"),
                                         object.optString("currency"),
                                         object.optString("product_special_price"),
@@ -888,58 +719,58 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void parseJSONUpto() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,AllURLs.UPTO_OFF,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        // progressBar.setVisibility(View.INVISIBLE);
-
-                        try {
-                            Log.e("rootJsonArray",response);
-                            JSONArray rootJsonArray = new JSONArray(response);
-
-                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
-                            productListDls.clear();
-                            for (int i = 0; i < rootJsonArray.length(); i++) {
-                                JSONObject object = rootJsonArray.getJSONObject(i);
-
-                                productListDls.add(new DealsModel(object.optString("id"),
-                                        object.optString("main_image"),
-                                        object.optString("top_offer"),
-                                        object.optString("product_name"),
-                                        object.optString("currency"),
-                                        object.optString("product_special_price"),
-                                        object.optString("product_description")));
-                            }
-
-                            Log.e("rootJsonArray",productListDls.size()+"");
-
-                            mExampleAdapterDls = new DealsAdapter(MainActivity.this, productListDls);
-                            recyclerViewDeals.setAdapter(mExampleAdapterDls);
-                            mExampleAdapterDls.notifyDataSetChanged();
-                            recyclerViewDeals.setHasFixedSize(true);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e("TAg",error.getMessage());
-                    }
-                });
-
-        mRequestQueueDls = Volley.newRequestQueue(this);
-        mRequestQueueDls.add(stringRequest);
-
-    }
+//    private void parseJSONUpto() {
+//
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET,AllURLs.UPTO_OFF,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//
+//                        // progressBar.setVisibility(View.INVISIBLE);
+//
+//                        try {
+//                            Log.e("rootJsonArray",response);
+//                            JSONArray rootJsonArray = new JSONArray(response);
+//
+//                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
+//                            productListDls.clear();
+//                            for (int i = 0; i < rootJsonArray.length(); i++) {
+//                                JSONObject object = rootJsonArray.getJSONObject(i);
+//
+//                                productListDls.add(new DealsModel(object.optString("id"),
+//                                        object.optString("main_image"),
+//                                        object.optString("offer_percent"),
+//                                        object.optString("product_name"),
+//                                        object.optString("currency"),
+//                                        object.optString("product_special_price"),
+//                                        object.optString("product_description")));
+//                            }
+//
+//                            Log.e("rootJsonArray",productListDls.size()+"");
+//
+//                            mExampleAdapterDls = new DealsAdapter(MainActivity.this, productListDls);
+//                            recyclerViewDeals.setAdapter(mExampleAdapterDls);
+//                            mExampleAdapterDls.notifyDataSetChanged();
+//                            recyclerViewDeals.setHasFixedSize(true);
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Log.e("TAg",error.getMessage());
+//                    }
+//                });
+//
+//        mRequestQueueDls = Volley.newRequestQueue(this);
+//        mRequestQueueDls.add(stringRequest);
+//
+//    }
 
 
     private void parseJSONBstslr() {
@@ -961,7 +792,7 @@ public class MainActivity extends AppCompatActivity
 
                                 productListDls.add(new DealsModel(object.optString("id"),
                                         object.optString("main_image"),
-                                        object.optString("top_offer"),
+                                        object.optString("offer_percent"),
                                         object.optString("product_name"),
                                         object.optString("currency"),
                                         object.optString("product_special_price"),
@@ -1051,7 +882,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_history) {
 
-            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            Intent intent = new Intent(MainActivity.this, HistoryListActivity.class);
             startActivity(intent);
 
         }

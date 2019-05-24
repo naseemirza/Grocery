@@ -158,6 +158,7 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
                             if (success.equalsIgnoreCase("1"))
                             {
                                 Toast.makeText(TopOfferDetaillsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(TopOfferDetaillsActivity.this, MainActivity.class));
                             }
                             else
                             {

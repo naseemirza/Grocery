@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:focusable="true"
+        card_view:cardElevation="1dp">
+
+    <RelativeLayout
+        android:id="@+id/re1"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linhrz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/indrelty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:text="Number of items : "
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/indrel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:clickable="true"
+                android:text="items" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linhrz1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linhrz"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fcsar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:text="Total Amount : "
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/crmcy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:clickable="true"
+                android:text="currency"
+                android:textColor="@color/red"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/fcsar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:clickable="true"
+                android:text=" amout"
+                android:textColor="@color/red"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/linhrz2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linhrz1"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/postedby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:text="Order date : "
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:clickable="true"
+                android:text=" date" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linhrzsts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linhrz2"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/stts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:text="Status : "
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:clickable="true"
+                android:text=" status" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/compsite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linhrzsts"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:text="View details>>"
+            android:textColor="@color/maincolor"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
+
+</RelativeLayout>

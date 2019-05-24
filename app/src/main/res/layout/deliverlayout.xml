@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="right"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/cross"
+        android:layout_alignParentRight="true" />
+
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:id="@+id/cardprompt"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/cancel"-->
+        <!--android:layout_marginEnd="20dp"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--&gt;-->
+
+        <TextView
+            android:id="@+id/textvw"
+            android:layout_below="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/maincolor"
+            android:text="Deliver to me"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+
+
+        <EditText
+            android:id="@+id/nametxt"
+            android:layout_below="@+id/textvw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"
+            android:textSize="13sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textCursorDrawable="@color/darkgray"
+            android:background="@drawable/editextborder"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:ems="10"
+            android:paddingStart="10dp"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextFields"/>
+
+        <EditText
+            android:id="@+id/streetname"
+            android:layout_below="@+id/nametxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"
+            android:textSize="13sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textCursorDrawable="@color/darkgray"
+            android:background="@drawable/editextborder"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:ems="10"
+            android:paddingStart="10dp"
+            android:hint="Street Name"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextFields"/>
+
+        <EditText
+            android:id="@+id/towntxt"
+            android:layout_below="@+id/streetname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"
+            android:textSize="13sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textCursorDrawable="@color/darkgray"
+            android:background="@drawable/editextborder"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:ems="10"
+            android:paddingStart="10dp"
+            android:hint="Town"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextFields"/>
+
+        <EditText
+            android:id="@+id/zipcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/towntxt"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:ems="10"
+            android:textCursorDrawable="@color/darkgray"
+            android:background="@drawable/editextborder"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="13sp"
+            android:hint="Postcode"
+            android:inputType="number"
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextFields"/>
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/zipcode"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:ems="10"
+            android:textCursorDrawable="@color/darkgray"
+            android:background="@drawable/editextborder"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="13sp"
+            android:hint="Contact Number"
+            android:inputType="number"
+            tools:ignore="RtlHardcoded,RtlSymmetry,TextFields" />
+
+
+    <Button
+        android:id="@+id/buttonL"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/phone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/maincolor"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!--</android.support.v7.widget.CardView>-->
+
+
+</RelativeLayout>

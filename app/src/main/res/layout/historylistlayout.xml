@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    card_view:cardElevation="2dp">
+
+    <RelativeLayout
+        android:id="@+id/re1"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/linhrz"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/indrelty"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:clickable="true"
+                android:text="Item Number : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:id="@+id/indrel"
+                android:text="items"
+                android:layout_marginStart="30dp"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linhrz1"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/linhrz"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/fcsar"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:text="Total Amount : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:id="@+id/crmcy"
+                android:clickable="true"
+                android:text="currency"
+                android:textSize="15sp"
+                android:layout_marginStart="23dp"
+                android:textColor="@color/red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/fcsar1"
+                android:clickable="true"
+                android:text=" amout"
+                android:textSize="15sp"
+                android:textColor="@color/red"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/linhrz2"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/linhrz1"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/postedby"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:text="Order date : "
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:id="@+id/admin"
+                android:clickable="true"
+                android:text=" date"
+                android:layout_marginStart="45dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linhrzsts"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/linhrz2"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/stts"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:text="Status : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:id="@+id/status"
+                android:clickable="true"
+                android:text=" status"
+                android:layout_marginStart="70dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/compsite"
+            android:text="View details>>"
+            android:layout_below="@+id/linhrzsts"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:clickable="false"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/maincolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

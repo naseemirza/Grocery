@@ -13,5 +13,6 @@ public class AllURLs {
     public static final String UNDER_EURO1 ="http://demotbs.com/dev/grocery/webservices/under_euro";
     public static final String UPTO_OFF ="http://demotbs.com/dev/grocery/webservices/under_discount";
     public static final String BEST_SELLER ="http://demotbs.com/dev/grocery/webservices/best_seller";
+    public static final String Shopby_details ="http://demotbs.com/dev/grocery/webservices/productBycategory?id=";
 
 }

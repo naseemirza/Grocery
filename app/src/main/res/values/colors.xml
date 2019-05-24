@@ -15,8 +15,10 @@
     <color name="lightgreen">#a4c639</color>
     <color name="green">#5ec639</color>
     <color name="red"> #FF0000</color>
+    <color name="red1"> #f60808</color>
     <color name="darkgray">#545454</color>
     <color name="lightblack">#323232</color>
     <color name="lightpurple">#663096</color>
+
 
 </resources>
