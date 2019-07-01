@@ -48,10 +48,11 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
         final TopOffersModel product = productList.get(position);
 
         String price=product.getmPrice();
+        //String symbol=product.getmCurrency();
        // String price1 = price.substring(0, price.indexOf("."));
         Currency currency = Currency.getInstance(product.getmCurrency());
         final String symbol = currency.getSymbol();
-        // Log.e("euro",price1);
+         //Log.e("euro", symbol);
 
         holder.textViewTitle.setText(product.getmName());
         holder.textViewoff.setText(product.getOfftext() + "%");

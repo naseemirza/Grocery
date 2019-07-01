@@ -1,9 +1,15 @@
 package solutions.thinkbiz.grocery;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +18,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +34,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ContactUsActivity extends AppCompatActivity {
@@ -38,6 +47,11 @@ public class ContactUsActivity extends AppCompatActivity {
     Button Submitbtn;
     ProgressDialog progressDialog;
 
+    String CPhone, CEmail, CAddress;
+
+    LinearLayout linearLayoutcall,linearLayoutmail;
+    String mname,memail,mcontact;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +59,12 @@ public class ContactUsActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Contact Us");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+        mname = pref.getString("Myname", "");
+        memail = pref.getString("email", "");
+        mcontact = pref.getString("phone", "");
 
         Cphone=(TextView)findViewById(R.id.textViewname);
         Cemail=(TextView)findViewById(R.id.textViewname1);
@@ -54,6 +74,84 @@ public class ContactUsActivity extends AppCompatActivity {
         Uemail=(EditText)findViewById(R.id.editTextemail);
         Uphone=(EditText)findViewById(R.id.phone);
         Umsg=(EditText)findViewById(R.id.editText2);
+
+        //Log.e("name",mname);
+
+        Uname.setText(mname);
+        Uemail.setText(memail);
+        Uphone.setText(mcontact);
+
+        //Call
+
+        linearLayoutcall = (LinearLayout) findViewById(R.id.li1);
+        linearLayoutcall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = String.valueOf(CPhone);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_USER_ACTION);
+                intent.setData(Uri.parse("tel:" + number));
+                if (ActivityCompat.checkSelfPermission(ContactUsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+
+                }
+                startActivity(intent);
+            }
+        });
+
+
+        //Mail
+
+        linearLayoutmail = (LinearLayout) findViewById(R.id.li2);
+        linearLayoutmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                Log.e("name", CEmail);
+
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + CEmail)); // only email apps should handle this
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+
+//                Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"));
+//                PackageManager pm = getPackageManager();
+//
+//                List<ResolveInfo> resInfo = pm.queryIntentActivities(emailIntent, 0);
+//                if (resInfo.size() > 0) {
+//                    ResolveInfo ri = resInfo.get(0);
+//                    // First create an intent with only the package name of the first registered email app
+//                    // and build a picked based on it
+//                    Intent intentChooser = pm.getLaunchIntentForPackage(ri.activityInfo.packageName);
+//                    Intent openInChooser =
+//                            Intent.createChooser(intentChooser,
+//                                    getString(R.string.mail));
+//
+//                    // Then create a list of LabeledIntent for the rest of the registered email apps
+//                    List<LabeledIntent> intentList = new ArrayList<LabeledIntent>();
+//                    for (int i = 1; i < resInfo.size(); i++) {
+//                        // Extract the label and repackage it in a LabeledIntent
+//                        ri = resInfo.get(i);
+//                        String packageName = ri.activityInfo.packageName;
+//                        Intent intent = pm.getLaunchIntentForPackage(packageName);
+//                        intentList.add(new LabeledIntent(intent, packageName, ri.loadLabel(pm), ri.icon));
+//                    }
+//
+//                    LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);
+//                    // Add the rest of the email apps to the picker selection
+//                    openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
+//                    startActivity(openInChooser);
+//                }
+
+            }
+        });
 
         ContactUs();
 
@@ -88,9 +186,9 @@ public class ContactUsActivity extends AppCompatActivity {
                                 for (int i = 0; i < rootJsonArray.length(); i++) {
                                     JSONObject obj = rootJsonArray.getJSONObject(i);
 
-                                    String CPhone=obj.getString("phone");
-                                    String CEmail=obj.getString("email");
-                                    String CAddress=obj.getString("address");
+                                     CPhone=obj.getString("phone");
+                                     CEmail=obj.getString("email");
+                                     CAddress=obj.getString("address");
                                     // Log.e("dls", delas);
 
                                     Cphone.setText(CPhone);

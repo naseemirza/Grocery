@@ -34,7 +34,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
 
     EditText nametxt,streettxt,towntxt,pincodetxt,contacttxt;
     Button submit;
-    String userId,name, street, town, pincode, contact;
+    String userId,name, street, town, pincode, contact,contact1;
     ProgressDialog progressDialog;
 
     @Override
@@ -55,7 +55,9 @@ public class DeliverToMeActivity extends AppCompatActivity {
         street = pref.getString("street", "");
         town = pref.getString("town", "");
         pincode = pref.getString("pincode", "");
-        contact = pref.getString("contact", "");
+        contact = pref.getString("phone", "");
+        //contact1 = pref.getString("phone", "");
+
 
         //Log.e("uid",userId);
 
@@ -70,6 +72,8 @@ public class DeliverToMeActivity extends AppCompatActivity {
         towntxt.setText(town);
         pincodetxt.setText(pincode);
         contacttxt.setText(contact);
+
+        //contacttxt.setText(contact1);
 
         submit=(Button)findViewById(R.id.buttonSt);
 
@@ -155,7 +159,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
                                                 edit.putString("street",street);
                                                 edit.putString("town",town);
                                                 edit.putString("pincode",pincode);
-                                                edit.putString("contact",contact);
+                                                edit.putString("phone",contact);
                                                 edit.apply();
 
                                                 Toast.makeText(DeliverToMeActivity.this, msg, Toast.LENGTH_SHORT).show();

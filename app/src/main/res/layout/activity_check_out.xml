@@ -19,7 +19,7 @@
         <RadioButton
             android:id="@+id/rb1"
             android:buttonTint="@color/maincolor"
-            android:text="Deliver to me"
+            android:text="Pay Now"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -27,7 +27,7 @@
         <RadioButton
             android:id="@+id/rb2"
             android:buttonTint="@color/maincolor"
-            android:text="Collect in store"
+            android:text="Pay on Delivery"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

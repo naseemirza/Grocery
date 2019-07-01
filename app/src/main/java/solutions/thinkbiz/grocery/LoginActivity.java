@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -35,6 +36,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -111,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
                         alertDialog.show();
+
                     } catch (Exception e) {
                     }
                 }
@@ -234,7 +238,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.e("uid",user_id);
                            // String name=obj.getString("user_name");
                           //  String email=obj.getString("user_email");
-                            //String phone=obj.getString("user_phone");
+                            String phone=obj.getString("user_phone");
 
                             if (success.equalsIgnoreCase("1"))
                             {
@@ -248,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
                                 edit.putString("email",email);
                                 edit.putBoolean("Booltype",booltype);
                                 edit.putBoolean("Booltype1",ads);
-                               // edit.putString("phone",phone);
+                                edit.putString("phone",phone);
 
                                 Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();

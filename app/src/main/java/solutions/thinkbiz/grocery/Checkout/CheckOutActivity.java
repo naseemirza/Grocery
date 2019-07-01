@@ -72,6 +72,7 @@ public class CheckOutActivity extends AppCompatActivity {
     RadioButton radioButton1,radioButton2;
    // Button dlivrbtn, Clctstrbtn;
 
+    String mname,memail,mcontact;
 
     EditText nametxt,streettxt,towntxt,pincodetxt,contacttxt;
 
@@ -87,6 +88,15 @@ public class CheckOutActivity extends AppCompatActivity {
         userId = pref.getString("user_id", "");
         symbol = pref.getString("crncy", "");
 
+        mname = pref.getString("Myname", "");
+        memail = pref.getString("email", "");
+        mcontact = pref.getString("phone", "");
+
+        //Log.e("name",mname);
+       // Log.e("name",memail);
+       // Log.e("name",mcontact);
+
+
         currencytxt=(TextView)findViewById(R.id.crncytype);
         pricetxtt=(TextView)findViewById(R.id.pricetotal);
         continuebtn=(Button)findViewById(R.id.checkout);
@@ -97,6 +107,8 @@ public class CheckOutActivity extends AppCompatActivity {
         pincodetxt=(EditText)findViewById(R.id.zipcode);
         contacttxt=(EditText)findViewById(R.id.phone);
 
+       // nametxt.setText(mname);
+        //contacttxt.setText(mcontact);
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioButton1 = (RadioButton) findViewById(R.id.rb1);
