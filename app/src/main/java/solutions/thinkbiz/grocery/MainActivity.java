@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
     ImageView banner;
     ImageView advrtise;
 
-    String token;
+    public static String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

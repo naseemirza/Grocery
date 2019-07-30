@@ -29,12 +29,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static solutions.thinkbiz.grocery.MainActivity.token;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -65,6 +68,9 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
         }
+
+        token =  FirebaseInstanceId.getInstance().getToken();
+       // Log.d("token", token);
 
         Lognimg=(ImageView)findViewById(R.id.imageView2);
 
@@ -287,6 +293,7 @@ public class LoginActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("email", email);
                 params.put("password", password);
+                params.put("device_token", token);
                 return params;
             }
         };

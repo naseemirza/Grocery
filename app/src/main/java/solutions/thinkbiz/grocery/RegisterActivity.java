@@ -22,12 +22,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static solutions.thinkbiz.grocery.MainActivity.token;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -45,6 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        token =  FirebaseInstanceId.getInstance().getToken();
+        //Log.d("token", token);
 
         editTextname=(EditText)findViewById(R.id.editTextNm);
         editTextEmail=(EditText)findViewById(R.id.editTextem);
@@ -187,6 +193,7 @@ public class RegisterActivity extends AppCompatActivity {
                 params.put("email", email);
                 params.put("phone", phone);
                 params.put("password", password);
+                params.put("device_token", token);
                 return params;
             }
         };

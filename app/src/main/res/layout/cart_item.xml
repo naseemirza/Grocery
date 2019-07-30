@@ -132,16 +132,6 @@
                             android:textColor="@color/lightblack"
                             android:textSize="13sp" />
 
-                        <!--<ImageButton-->
-                            <!--android:id="@+id/remov"-->
-                            <!--android:layout_width="35dp"-->
-                            <!--android:layout_height="35dp"-->
-                            <!--android:layout_marginStart="8dp"-->
-                            <!--android:src="@drawable/ic_remove_black_24dp" />-->
-
-                        <!--android:onClick="decreaseInteger"-->
-
-                        <!--android:layout_marginStart="-4dp"-->
 
                         <TextView
                             android:id="@+id/editqnty"
