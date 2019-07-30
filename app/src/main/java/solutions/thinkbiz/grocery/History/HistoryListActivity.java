@@ -2,13 +2,14 @@ package solutions.thinkbiz.grocery.History;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -60,7 +61,7 @@ public class HistoryListActivity extends AppCompatActivity {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
-        String url="http://demotbs.com/dev/grocery/webservices/getAllorder?user_id="+userId;
+        String url="https://demotbs.com/dev/grocery/webservices/getAllorder?user_id="+userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -104,5 +105,55 @@ public class HistoryListActivity extends AppCompatActivity {
 
         mRequestQueue1 = Volley.newRequestQueue(this);
         mRequestQueue1.add(stringRequest);
+    }
+
+    public void AddToMethod(String id) {
+
+        String url="https://demotbs.com/dev/grocery/webservices/reorder?id="+id+"&user_id="+userId;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        // Log.e("Response", response);
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            String success= obj.getString("s");
+                            String error= obj.getString("e");
+                            String msg=obj.getString("m");
+
+                            Log.e("cid",msg);
+
+                            if (success.equalsIgnoreCase("1"))
+                            {
+                                Toast.makeText(HistoryListActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(HistoryListActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            }
+
+                            mExampleList1.clear();
+                            parseJSON1();
+                            mExampleAdapter1.notifyDataSetChanged();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(HistoryListActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(CheckOutActivity.this, "error" + error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+        RequestQueue queue2 = Volley.newRequestQueue(HistoryListActivity.this);
+        queue2.add(stringRequest);
     }
 }

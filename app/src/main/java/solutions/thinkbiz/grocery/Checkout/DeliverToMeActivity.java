@@ -4,16 +4,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,18 +25,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import solutions.thinkbiz.grocery.PaypalActivity;
 import solutions.thinkbiz.grocery.R;
-import solutions.thinkbiz.grocery.RegisterActivity;
 
 public class DeliverToMeActivity extends AppCompatActivity {
 
     EditText nametxt,streettxt,towntxt,pincodetxt,contacttxt;
     Button submit;
-    String userId,name, street, town, pincode, contact,contact1;
+    String userId,name, street, town, pincode, contact,price;
     ProgressDialog progressDialog;
+
+    RadioGroup radioGroup;
+    RadioButton radioButton1,radioButton2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +51,55 @@ public class DeliverToMeActivity extends AppCompatActivity {
 
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         userId = pref.getString("user_id", "");
+        price = pref.getString("Tprice", "");
 
         name = pref.getString("Myname", "");
         street = pref.getString("street", "");
         town = pref.getString("town", "");
         pincode = pref.getString("pincode", "");
-        contact = pref.getString("phone", "");
+        contact = pref.getString("Myphone", "");
         //contact1 = pref.getString("phone", "");
 
 
         //Log.e("uid",userId);
+
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioButton1 = (RadioButton) findViewById(R.id.rb1);
+        radioButton2 = (RadioButton) findViewById(R.id.rb2);
+
+        radioButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("Tprice", price);
+
+                edit.apply();
+                Intent intent = new Intent(DeliverToMeActivity.this, PaypalActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+
+        radioButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("Tprice", price);
+
+                edit.apply();
+                Intent intent=new Intent(DeliverToMeActivity.this, DateTimeForPODActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
 
         nametxt=(EditText)findViewById(R.id.nametxt);
         streettxt=(EditText)findViewById(R.id.streetname);
@@ -86,7 +126,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 
@@ -137,7 +176,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
         final String contact=contacttxt.getText().toString();
 
      //   Log.e("name", userId);
-        String url="http://demotbs.com/dev/grocery/webservices/shipping_address?user_id="+userId+"&name="+name+"&street_name="+street+"&town="+town+"&postal_code="+pincode+"&contact_number="+contact;
+        String url="https://demotbs.com/dev/grocery/webservices/shipping_address?user_id="+userId+"&name="+name+"&street_name="+street+"&town="+town+"&postal_code="+pincode+"&contact_number="+contact;
                         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                                 new Response.Listener<String>() {
                                     @Override
@@ -152,7 +191,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
 
                                             if (success.equalsIgnoreCase("1"))
                                             {
-
                                                 SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                                                 SharedPreferences.Editor edit = pref.edit();
                                                 edit.putString("Myname",name);
@@ -163,7 +201,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
                                                 edit.apply();
 
                                                 Toast.makeText(DeliverToMeActivity.this, msg, Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(DeliverToMeActivity.this,CheckOutActivity.class));
+                                                startActivity(new Intent(DeliverToMeActivity.this, PaypalActivity.class));
                                                 progressDialog.dismiss();
 
                                             }

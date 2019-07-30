@@ -3,11 +3,11 @@ package solutions.thinkbiz.grocery;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,7 +30,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import solutions.thinkbiz.grocery.ShopByPkg.ShopbyAdapter;
 import solutions.thinkbiz.grocery.TopOffersPkg.TopOfferDetaillsActivity;
 
 public class EditTextActivity extends AppCompatActivity {
@@ -81,7 +80,6 @@ public class EditTextActivity extends AppCompatActivity {
             }
         });
 
-
         mExampleList = new ArrayList<>();
         sRecyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         sRecyclerview.setNestedScrollingEnabled(false);
@@ -94,7 +92,7 @@ public class EditTextActivity extends AppCompatActivity {
 
     private void parseJSON() {
 
-        String url="http://demotbs.com/dev/grocery/webservices/searchdata?search="+pname;
+        String url="https://demotbs.com/dev/grocery/webservices/searchdata?search="+pname;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

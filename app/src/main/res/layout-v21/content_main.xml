@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/tools"
@@ -11,7 +11,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="solutions.thinkbiz.grocery.MainActivity"
     tools:showIn="@layout/app_bar_main">
-
 
         <ScrollView
             android:id="@+id/scrolview"
@@ -97,7 +96,7 @@
                     </LinearLayout>
 
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerview1"
                         android:layout_width="match_parent"
                         android:layout_height="320dp"
@@ -106,7 +105,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp">
 
-                    </android.support.v7.widget.RecyclerView>
+                    </androidx.recyclerview.widget.RecyclerView>
 
                     <ProgressBar
                         android:id="@+id/progressBar"
@@ -172,13 +171,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                        <android.support.v7.widget.RecyclerView
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerview2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp">
 
-                        </android.support.v7.widget.RecyclerView>
+                        </androidx.recyclerview.widget.RecyclerView>
 
                         </RelativeLayout>
 
@@ -280,7 +279,7 @@
                         android:layout_height="match_parent">
 
 
-                        <android.support.v7.widget.RecyclerView
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerviewdealsa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -290,7 +289,7 @@
                             android:visibility="visible"
                             android:layout_marginBottom="10dp">
 
-                        </android.support.v7.widget.RecyclerView>
+                        </androidx.recyclerview.widget.RecyclerView>
 
                         <!--<android.support.v7.widget.RecyclerView-->
                             <!--android:id="@+id/recyclerviewundr"-->
@@ -340,4 +339,4 @@
         </ScrollView>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

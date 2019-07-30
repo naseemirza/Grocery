@@ -1,9 +1,10 @@
 package solutions.thinkbiz.grocery.Checkout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 import solutions.thinkbiz.grocery.MainActivity;
 import solutions.thinkbiz.grocery.R;
 
-public class StoreRespActivity extends AppCompatActivity {
+public class PayOnDeliveryActivity extends AppCompatActivity {
 
     Button button;
     String OrderoId;
@@ -22,7 +23,7 @@ public class StoreRespActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_resp);
+        setContentView(R.layout.activity_pay_on_delivery);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -36,7 +37,7 @@ public class StoreRespActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StoreRespActivity.this,MainActivity.class));
+                startActivity(new Intent(PayOnDeliveryActivity.this, MainActivity.class));
             }
         });
     }

@@ -2,10 +2,10 @@ package solutions.thinkbiz.grocery.History;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,9 +24,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import solutions.thinkbiz.grocery.Checkout.CheckOutActivity;
-import solutions.thinkbiz.grocery.Checkout.OrderAdapter;
-import solutions.thinkbiz.grocery.Checkout.OrderModel;
 import solutions.thinkbiz.grocery.R;
 
 public class HistoryActivity extends AppCompatActivity {
@@ -74,7 +71,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
-        String url="http://demotbs.com/dev/grocery/webservices/getAllorder_item?order_id="+Id;
+        String url="https://demotbs.com/dev/grocery/webservices/getAllorder_item?order_id="+Id;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

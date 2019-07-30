@@ -1,20 +1,24 @@
 package solutions.thinkbiz.grocery;
 
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,6 +43,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.iid.FirebaseInstanceId;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +53,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import solutions.thinkbiz.grocery.Checkout.CheckOutActivity;
-import solutions.thinkbiz.grocery.History.HistoryActivity;
 import solutions.thinkbiz.grocery.History.HistoryListActivity;
 import solutions.thinkbiz.grocery.ShopByPkg.AllCategActivity;
 import solutions.thinkbiz.grocery.Tabs.BstsellerPkg.BestSlrAdapter;
@@ -129,6 +134,8 @@ public class MainActivity extends AppCompatActivity
     ImageView banner;
     ImageView advrtise;
 
+    String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,12 +149,35 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         booltype=pref.getBoolean("Booltype", Boolean.parseBoolean(""));
         ads=pref.getBoolean("Booltype1", Boolean.parseBoolean(""));
-        uemail = pref.getString("email", "");
+        uemail = pref.getString("Myemail", "");
         userId = pref.getString("user_id", "");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String id = "channel_id";
+            String channelName = "notificationName";
+            String channelDescription = "notificationDescription";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel notificationChannel = new NotificationChannel(id, channelName, importance);
+//            notificationChannel.setDescription(channelDescription);
+//            notificationChannel.enableLights(true);
+//            notificationChannel.setLightColor(Color.RED);
+//            notificationChannel.enableVibration(true);
+//            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+           // builder.setChannelId(id);
+        }
+
+          // token = FirebaseInstanceId.getInstance().getToken();
+        token =  FirebaseInstanceId.getInstance().getToken();
+           Log.d("token", token);
 
         //Advertisement
         //ads=false;
@@ -403,7 +433,7 @@ public class MainActivity extends AppCompatActivity
 
         //showSimpleProgressDialog(this, "Loading...","Fetching Json",false);
 
-        String url="http://demotbs.com/dev/grocery/webservices/advertise_image";
+        String url="https://demotbs.com/dev/grocery/webservices/advertise_image";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -414,7 +444,7 @@ public class MainActivity extends AppCompatActivity
                         try {
                             JSONObject obj = new JSONObject(response);
                             String msg=obj.getString("advertise_image");
-                            String path="http://demotbs.com/dev/grocery/assets/uploads/advertise_image/"+msg;
+                            String path="https://demotbs.com/dev/grocery/assets/uploads/advertise_image/"+msg;
                             Log.e("Response", path);
 
                             Glide.with(MainActivity.this)
@@ -445,7 +475,7 @@ public class MainActivity extends AppCompatActivity
 
     private void mainImage() {
 
-        String url="http://demotbs.com/dev/grocery/webservices/main_image";
+        String url="https://demotbs.com/dev/grocery/webservices/main_image";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -456,7 +486,7 @@ public class MainActivity extends AppCompatActivity
                         try {
                             JSONObject obj = new JSONObject(response);
                             String msg=obj.getString("main_image");
-                            String path="http://demotbs.com/dev/grocery/assets/uploads/slider/"+msg;
+                            String path="https://demotbs.com/dev/grocery/assets/uploads/slider/"+msg;
                         //    Log.e("Response", path);
 
                             Glide.with(MainActivity.this)
@@ -487,7 +517,7 @@ public class MainActivity extends AppCompatActivity
 
     private void getCount() {
 
-        String url="http://demotbs.com/dev/grocery/webservices/count_cart?user_id="+userId;
+        String url="https://demotbs.com/dev/grocery/webservices/count_cart?user_id="+userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

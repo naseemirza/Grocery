@@ -2,10 +2,10 @@ package solutions.thinkbiz.grocery.ShopByPkg;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -23,7 +23,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import solutions.thinkbiz.grocery.AllURLs;
-import solutions.thinkbiz.grocery.MainActivity;
 import solutions.thinkbiz.grocery.R;
 import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsAdapter;
 import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsModel;

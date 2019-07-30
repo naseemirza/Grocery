@@ -5,12 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.LabeledIntent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,11 +30,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ContactUsActivity extends AppCompatActivity {
 
@@ -63,8 +55,8 @@ public class ContactUsActivity extends AppCompatActivity {
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
         mname = pref.getString("Myname", "");
-        memail = pref.getString("email", "");
-        mcontact = pref.getString("phone", "");
+        memail = pref.getString("Myemail", "");
+        mcontact = pref.getString("Myphone", "");
 
         Cphone=(TextView)findViewById(R.id.textViewname);
         Cemail=(TextView)findViewById(R.id.textViewname1);
@@ -172,7 +164,7 @@ public class ContactUsActivity extends AppCompatActivity {
 
     private void ContactUs() {
 
-            String url="http://demotbs.com/dev/grocery/webservices/contact_address";
+            String url="https://demotbs.com/dev/grocery/webservices/contact_address";
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
@@ -263,7 +255,7 @@ public class ContactUsActivity extends AppCompatActivity {
         final String phone = Uphone.getText().toString().trim();
         final String message = Umsg.getText().toString().trim();
 
-        String url="http://demotbs.com/dev/grocery/webservices/contactForm?email="+email+"&name="+name+"&phone="+phone+"&message="+message;
+        String url="https://demotbs.com/dev/grocery/webservices/contactForm?email="+email+"&name="+name+"&phone="+phone+"&message="+message;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
                     @Override

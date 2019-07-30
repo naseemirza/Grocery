@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,11 +33,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -48,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     public static Boolean booltype;
     public static Boolean ads;
     ImageView Lognimg;
-    String name;
+    String name, email,phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         booltype=pref.getBoolean("Booltype", Boolean.parseBoolean(""));
         name = pref.getString("Myname", "");
+        email = pref.getString("Myemail", "");
+        phone = pref.getString("Myphone", "");
 
         if(booltype){
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -72,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginImage();
 
         editTextEmail=(EditText)findViewById(R.id.editTextU);
+        editTextEmail.setText(email);
         editTextPass=(EditText)findViewById(R.id.editTextP);
 
         reg = (TextView) findViewById(R.id.textViewRgs);
@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void LoginImage() {
 
-        String url="http://demotbs.com/dev/grocery/webservices/login_image";
+        String url="https://demotbs.com/dev/grocery/webservices/login_image";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             String msg=obj.getString("login_image");
-                            String path="http://demotbs.com/dev/grocery/assets/editor_upload_images/image/"+msg;
+                            String path="https://demotbs.com/dev/grocery/assets/editor_upload_images/image/"+msg;
                             Log.e("Response", path);
                             Glide.with(getApplicationContext())
                                     .load(path)
@@ -218,10 +218,10 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Signing In...");
         progressDialog.show();
 
-        final String email = editTextEmail.getText().toString().trim();
+       // final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPass.getText().toString().trim();
 
-        String url="http://demotbs.com/dev/grocery/webservices/login?";
+        String url="https://demotbs.com/dev/grocery/webservices/login?";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -249,10 +249,10 @@ public class LoginActivity extends AppCompatActivity {
                                 edit.putString("Myname",name);
                                 edit.putString("user_id",user_id);
                                // edit.putString("name",name);
-                                edit.putString("email",email);
+                                edit.putString("Myemail",email);
                                 edit.putBoolean("Booltype",booltype);
                                 edit.putBoolean("Booltype1",ads);
-                                edit.putString("phone",phone);
+                                edit.putString("Myphone",phone);
 
                                 Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();

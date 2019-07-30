@@ -7,7 +7,7 @@
     android:background="@color/gray"
     tools:context="solutions.thinkbiz.grocery.ShopByPkg.AllCategActivity">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,6 +15,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

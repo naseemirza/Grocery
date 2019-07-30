@@ -9,7 +9,7 @@ public class ShopbyModel {
     private String id;
     private String mImageUrl;
     private String mName;
-    String image_path = "http://demotbs.com/dev/grocery//assets/uploads/category/";
+    String image_path = "https://demotbs.com/dev/grocery//assets/uploads/category/";
 
     public ShopbyModel(String id, String mImageUrl, String mName) {
         this.id = id;

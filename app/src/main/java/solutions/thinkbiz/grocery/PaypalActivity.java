@@ -2,13 +2,11 @@ package solutions.thinkbiz.grocery;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -33,7 +31,7 @@ public class PaypalActivity extends AppCompatActivity {
 
         mywebview = (WebView) findViewById(R.id.webView1);
         mywebview.setWebViewClient(new MyWebViewClient());
-        String url="http://demotbs.com/dev/grocery/webservices/buy?user_id="+userId+"&price="+price;
+        String url="https://demotbs.com/dev/grocery/webservices/buy?user_id="+userId+"&price="+price;
         mywebview.getSettings().setJavaScriptEnabled(true);
         mywebview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         mywebview.loadUrl(url);

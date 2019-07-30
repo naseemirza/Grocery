@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "404935233533",
+    "firebase_url": "https://grocery-5966d.firebaseio.com",
+    "project_id": "grocery-5966d",
+    "storage_bucket": "grocery-5966d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404935233533:android:a20baaa88c2f137c",
+        "android_client_info": {
+          "package_name": "solutions.thinkbiz.grocery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404935233533-ov7qrsuvqsvvb9su5f12ibcdtcatfc1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9hPsTmT3qOW8tuWfbmCCZSxwa0TYjDRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404935233533-ov7qrsuvqsvvb9su5f12ibcdtcatfc1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

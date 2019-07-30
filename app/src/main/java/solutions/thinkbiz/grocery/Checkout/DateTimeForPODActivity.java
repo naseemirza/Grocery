@@ -1,13 +1,15 @@
 package solutions.thinkbiz.grocery.Checkout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -30,7 +32,7 @@ import java.util.Calendar;
 
 import solutions.thinkbiz.grocery.R;
 
-public class DateTimeActivity extends AppCompatActivity {
+public class DateTimeForPODActivity extends AppCompatActivity {
 
     Button btnDatePicker, btnTimePicker;
     EditText txtDate, txtTime;
@@ -39,23 +41,24 @@ public class DateTimeActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     String userId, price;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_date_time);
+        setContentView(R.layout.activity_date_time_for_pod);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        getSupportActionBar().setTitle("date and Time");
+        getSupportActionBar().setTitle("Pay On Delivery");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         userId = pref.getString("user_id", "");
         price = pref.getString("Tprice", "");
 
-       // Log.e("name", userId);
-      //  Log.e("name", price);
+       //  Log.e("name", userId);
+        //  Log.e("name", price);
 
         btnDatePicker=(Button)findViewById(R.id.selectdate);
         btnTimePicker=(Button)findViewById(R.id.selecttime);
@@ -71,7 +74,7 @@ public class DateTimeActivity extends AppCompatActivity {
                 mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(DateTimeActivity.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(DateTimeForPODActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -95,7 +98,7 @@ public class DateTimeActivity extends AppCompatActivity {
                 mMinute = c.get(Calendar.MINUTE);
 
                 // Launch Time Picker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(DateTimeActivity.this,
+                TimePickerDialog timePickerDialog = new TimePickerDialog(DateTimeForPODActivity.this,
                         new TimePickerDialog.OnTimeSetListener() {
 
                             @Override
@@ -123,7 +126,6 @@ public class DateTimeActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     private boolean isValidate()
@@ -145,7 +147,7 @@ public class DateTimeActivity extends AppCompatActivity {
 
     private void Senddata() {
 
-        progressDialog = new ProgressDialog(DateTimeActivity.this);
+        progressDialog = new ProgressDialog(DateTimeForPODActivity.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
@@ -154,7 +156,7 @@ public class DateTimeActivity extends AppCompatActivity {
         final String datetimetxt=datetxt+" "+timetxt;
 
 
-        String url="https://demotbs.com/dev/grocery/webservices/collectByStore?user_id="+userId+"&date_time="+datetimetxt+"&total_amount="+price;
+        String url="https://demotbs.com/dev/grocery/webservices/cash_on_delivery?user_id="+userId+"&date_time="+datetimetxt+"&total_amount="+price;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
                     @Override
@@ -166,20 +168,20 @@ public class DateTimeActivity extends AppCompatActivity {
                             String msg=obj.getString("status");
                             String orderid=obj.getString("order_id");
 
-                            Toast.makeText(DateTimeActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DateTimeForPODActivity.this, msg, Toast.LENGTH_SHORT).show();
                             //startActivity(new Intent(DateTimeActivity.this,StoreRespActivity.class));
                             SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                             SharedPreferences.Editor edit = pref.edit();
                             edit.putString("OrderId", orderid);
 
                             edit.apply();
-                            Intent intent = new Intent(DateTimeActivity.this, StoreRespActivity.class);
+                            Intent intent = new Intent(DateTimeForPODActivity.this, PayOnDeliveryActivity.class);
                             startActivity(intent);
                             progressDialog.dismiss();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(DateTimeActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DateTimeForPODActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
                     }
@@ -187,12 +189,13 @@ public class DateTimeActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DateTimeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DateTimeForPODActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 });
-        RequestQueue requestQueue= Volley.newRequestQueue(DateTimeActivity.this);
+        RequestQueue requestQueue= Volley.newRequestQueue(DateTimeForPODActivity.this);
         requestQueue.add(stringRequest);
 
     }
 }
+

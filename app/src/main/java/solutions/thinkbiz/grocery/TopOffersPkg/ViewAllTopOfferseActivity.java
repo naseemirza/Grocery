@@ -1,9 +1,9 @@
 package solutions.thinkbiz.grocery.TopOffersPkg;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -22,7 +22,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import solutions.thinkbiz.grocery.AllURLs;
-import solutions.thinkbiz.grocery.MainActivity;
 import solutions.thinkbiz.grocery.R;
 
 public class ViewAllTopOfferseActivity extends AppCompatActivity {

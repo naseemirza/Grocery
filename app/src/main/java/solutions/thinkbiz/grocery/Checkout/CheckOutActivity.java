@@ -1,33 +1,23 @@
 package solutions.thinkbiz.grocery.Checkout;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
-import android.icu.text.SimpleDateFormat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -40,19 +30,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Currency;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 
-import solutions.thinkbiz.grocery.AddressActivity;
-import solutions.thinkbiz.grocery.LoginActivity;
 import solutions.thinkbiz.grocery.PaypalActivity;
 import solutions.thinkbiz.grocery.R;
-import solutions.thinkbiz.grocery.RegisterActivity;
-import solutions.thinkbiz.grocery.TopOffersPkg.TopOfferDetaillsActivity;
 
 
 public class CheckOutActivity extends AppCompatActivity {
@@ -65,7 +45,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
     TextView currencytxt, pricetxtt;
     Button continuebtn;
-   public static int total;
+    public static double total;
     String userId,symbol;
 
     RadioGroup radioGroup;
@@ -89,8 +69,8 @@ public class CheckOutActivity extends AppCompatActivity {
         symbol = pref.getString("crncy", "");
 
         mname = pref.getString("Myname", "");
-        memail = pref.getString("email", "");
-        mcontact = pref.getString("phone", "");
+        memail = pref.getString("Myemail", "");
+        mcontact = pref.getString("Myphone", "");
 
         //Log.e("name",mname);
        // Log.e("name",memail);
@@ -117,6 +97,12 @@ public class CheckOutActivity extends AppCompatActivity {
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("Tprice", String.valueOf(total));
+
+                edit.apply();
 
                 Intent intent=new Intent(CheckOutActivity.this, DeliverToMeActivity.class);
                 startActivity(intent);
@@ -170,7 +156,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
-        String url="http://demotbs.com/dev/grocery/webservices/getAllCart?user_id="+userId;
+        String url="https://demotbs.com/dev/grocery/webservices/getAllCart?user_id="+userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -223,7 +209,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
         //Log.e("qty", String.valueOf(qunty1));
 
-        String url="http://demotbs.com/dev/grocery/webservices/update_cart?quantity="+qunty1+"&cart_id="+cartID;
+        String url="https://demotbs.com/dev/grocery/webservices/update_cart?quantity="+qunty1+"&cart_id="+cartID;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -272,7 +258,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
     public void DeleteMethod(final String cartID) {
 
-        String url="http://demotbs.com/dev/grocery/webservices/delete_cart?cart_id="+cartID;
+        String url="https://demotbs.com/dev/grocery/webservices/delete_cart?cart_id="+cartID;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -320,7 +306,7 @@ public class CheckOutActivity extends AppCompatActivity {
         queue2.add(stringRequest);
 
     }
-   public void TotalPrice() {
+    public void TotalPrice() {
 
         total = 0;
 
@@ -330,9 +316,9 @@ public class CheckOutActivity extends AppCompatActivity {
 
         }
 
-      //  Log.e("stotal", String.valueOf(total));
-         currencytxt.setText(symbol);
-         pricetxtt.setText(String.valueOf(total));
+         // Log.e("stotal", String.valueOf(total));
+        currencytxt.setText(symbol);
+        pricetxtt.setText(String.valueOf(total));
 
     }
 

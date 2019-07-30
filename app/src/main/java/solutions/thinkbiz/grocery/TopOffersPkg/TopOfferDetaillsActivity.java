@@ -1,16 +1,14 @@
 package solutions.thinkbiz.grocery.TopOffersPkg;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -35,7 +33,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import solutions.thinkbiz.grocery.Checkout.CheckOutActivity;
 import solutions.thinkbiz.grocery.MainActivity;
 import solutions.thinkbiz.grocery.R;
 
@@ -141,7 +138,7 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
 
     private void AddTocart() {
 
-        String url="http://demotbs.com/dev/grocery/webservices/add_to_cart";
+        String url="https://demotbs.com/dev/grocery/webservices/add_to_cart";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

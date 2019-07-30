@@ -1,16 +1,11 @@
 package solutions.thinkbiz.grocery.History;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +15,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.Currency;
 import java.util.List;
 
-import solutions.thinkbiz.grocery.Checkout.CheckOutActivity;
-import solutions.thinkbiz.grocery.Checkout.OrderAdapter;
-import solutions.thinkbiz.grocery.Checkout.OrderModel;
 import solutions.thinkbiz.grocery.R;
 
 /**

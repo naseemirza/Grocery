@@ -14,7 +14,7 @@ public class OrderModel {
     private String totalprice;
     private String price;
     private String quantity;
-    String image_path = "http://demotbs.com/dev/grocery//assets/uploads/product/";
+    String image_path = "https://demotbs.com/dev/grocery//assets/uploads/product/";
 
     public OrderModel(String pid, String cartId, String image, String name, String currency, String totalprice, String price, String quantity) {
         this.Pid = pid;
@@ -67,8 +67,8 @@ public class OrderModel {
         this.currency = currency;
     }
 
-    public int getTotalprice() {
-        return Integer.parseInt(totalprice);
+    public double getTotalprice() {
+        return Double.parseDouble(totalprice);
     }
 
     public void setTotalprice(String totalprice) {

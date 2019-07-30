@@ -3,9 +3,8 @@ package solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import java.util.List;
 
 import solutions.thinkbiz.grocery.R;
 import solutions.thinkbiz.grocery.RecyclerViewItemClickListener;
-import solutions.thinkbiz.grocery.Tabs.TabDetailsActivity;
 import solutions.thinkbiz.grocery.TopOffersPkg.TopOfferDetaillsActivity;
 
 /**

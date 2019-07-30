@@ -12,7 +12,7 @@ public class HistoryModel {
     private String mCurrency;
     private String mPrice;
     private String qty;
-    String image_path = "http://demotbs.com/dev/grocery//assets/uploads/product/";
+    String image_path = "https://demotbs.com/dev/grocery//assets/uploads/product/";
 
     public HistoryModel(String id, String mImageUrl, String mName, String mCurrency, String mPrice,String qty) {
         this.id = id;

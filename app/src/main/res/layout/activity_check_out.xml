@@ -19,7 +19,7 @@
         <RadioButton
             android:id="@+id/rb1"
             android:buttonTint="@color/maincolor"
-            android:text="Pay Now"
+            android:text="Deliver to me"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -27,7 +27,7 @@
         <RadioButton
             android:id="@+id/rb2"
             android:buttonTint="@color/maincolor"
-            android:text="Pay on Delivery"
+            android:text="Collect in store"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -35,7 +35,7 @@
 
     </RadioGroup>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/myRecyclerID"
         android:layout_below="@+id/radioGroup"
@@ -45,7 +45,7 @@
         android:layout_marginTop="20dp"
         android:scrollbars="horizontal">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <ProgressBar
         android:visibility="gone"

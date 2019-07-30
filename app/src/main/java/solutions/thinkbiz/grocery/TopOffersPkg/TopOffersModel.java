@@ -13,7 +13,7 @@ public class TopOffersModel {
     private String mCurrency;
     private String mPrice;
     private String descr;
-    String image_path = "http://demotbs.com/dev/grocery//assets/uploads/product/";
+    String image_path = "https://demotbs.com/dev/grocery//assets/uploads/product/";
 
     public TopOffersModel(String id, String mImageUrl, String offtext, String mName, String mCurrency, String mPrice, String descr) {
         this.id = id;

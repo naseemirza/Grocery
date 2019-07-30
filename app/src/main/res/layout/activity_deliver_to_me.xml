@@ -6,11 +6,41 @@
     android:layout_height="match_parent"
     tools:context="solutions.thinkbiz.grocery.Checkout.DeliverToMeActivity">
 
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="2"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:buttonTint="@color/maincolor"
+            android:text="PayPal"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:buttonTint="@color/maincolor"
+            android:text="Pay on delivery"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RadioGroup>
+
     <TextView
         android:id="@+id/textvw1"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/radioGroup"
         android:layout_marginTop="20dp"
         android:text="Please fill delivery address below"
         android:textAlignment="center"

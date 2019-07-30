@@ -1,9 +1,8 @@
 package solutions.thinkbiz.grocery.Tabs.BstsellerPkg;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,6 @@ import java.util.Currency;
 import java.util.List;
 
 import solutions.thinkbiz.grocery.R;
-import solutions.thinkbiz.grocery.RecyclerViewItemClickListener;
-import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsAdapter;
-import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsModel;
-import solutions.thinkbiz.grocery.Tabs.TabDetailsActivity;
-import solutions.thinkbiz.grocery.TopOffersPkg.TopOfferDetaillsActivity;
 
 /**
  * Created by User on 22-Feb-19.

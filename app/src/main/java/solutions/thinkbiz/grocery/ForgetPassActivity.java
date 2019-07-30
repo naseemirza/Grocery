@@ -1,10 +1,9 @@
 package solutions.thinkbiz.grocery;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -83,7 +82,7 @@ public class ForgetPassActivity extends AppCompatActivity {
 
         final String email = editText.getText().toString().trim();
 
-        String url="http://demotbs.com/dev/grocery/webservices/forget_password";
+        String url="https://demotbs.com/dev/grocery/webservices/forget_password";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

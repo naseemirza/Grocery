@@ -3,22 +3,16 @@ package solutions.thinkbiz.grocery.History;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import java.util.Currency;
 import java.util.List;
 
 import solutions.thinkbiz.grocery.R;
-import solutions.thinkbiz.grocery.ShopByPkg.ShopbyDetailsActivity;
 
 /**
  * Created by User on 17-Apr-19.
@@ -48,13 +42,13 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
         final String id=product.getId();
         final String date=product.getDate();
-        String symbol, price;
+        final String symbol, price;
 
         SharedPreferences pref = mCtx.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         symbol = pref.getString("crncy", "");
         price = pref.getString("Tprice", "");
 
-     //   Log.e("crncy",symbol);
+        //Log.e("uid",userId);
       //  Log.e("price",price);
 
 
@@ -81,6 +75,16 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
             }
         });
 
+        holder.reorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((HistoryListActivity)mCtx).AddToMethod(id);
+               // productList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
+
     }
 
     @Override
@@ -89,7 +93,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder  {
-        TextView itemtxt, crncytxt, totalamttxt,datetxt, statustxt, viwmoretxt;
+        TextView itemtxt, crncytxt, totalamttxt,datetxt, statustxt, viwmoretxt, reorder;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +103,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
             datetxt = itemView.findViewById(R.id.admin);
             statustxt = itemView.findViewById(R.id.status);
             viwmoretxt = itemView.findViewById(R.id.compsite);
+            reorder = itemView.findViewById(R.id.reorder);
         }
     }
 

@@ -2,8 +2,8 @@ package solutions.thinkbiz.grocery.Checkout;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
 
         holder.textViewTitle.setText(product.getName());
         holder.textViewcurrncy.setText(symbol);
-      //  holder.textViewprice.setText(product.getPrice());
+        //  holder.textViewprice.setText(product.getPrice());
         final String textprice= String.valueOf(productList.get(position).getTotalprice());
         holder.textViewprice.setText(textprice);
         holder.textViewQty.setText(product.getQuantity());
@@ -91,12 +90,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
                     @Override
                     public void onClick(View v) {
 
-                long result =  ((CheckOutActivity)mCtx).AddMethod(cartID, Integer.parseInt(qunty.getText().toString()));
-                if (result == 1) {
-                    holder.textViewQty.setText(qunty.getText().toString());
-                    dialog.dismiss();
+                        long result =  ((CheckOutActivity)mCtx).AddMethod(cartID, Integer.parseInt(qunty.getText().toString()));
+                        if (result == 1) {
+                            holder.textViewQty.setText(qunty.getText().toString());
+                            dialog.dismiss();
 
-                }
+                        }
                     }
                 });
 
@@ -180,16 +179,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
             public void onClick(View v) {
 
 
-                    ((CheckOutActivity)mCtx).DeleteMethod(cartID);
-                       productList.remove(position);
-                       notifyDataSetChanged();
+                ((CheckOutActivity)mCtx).DeleteMethod(cartID);
+                productList.remove(position);
+                notifyDataSetChanged();
             }
         });
 
     }
 
 
-        @Override
+    @Override
     public int getItemCount() {
         return productList.size();
     }
