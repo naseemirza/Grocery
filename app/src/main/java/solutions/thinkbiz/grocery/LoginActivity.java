@@ -70,14 +70,14 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         token =  FirebaseInstanceId.getInstance().getToken();
-       // Log.d("token", token);
+        //Log.d("token", token);
 
         Lognimg=(ImageView)findViewById(R.id.imageView2);
 
         LoginImage();
 
         editTextEmail=(EditText)findViewById(R.id.editTextU);
-        editTextEmail.setText(email);
+        //editTextEmail.setText(email);
         editTextPass=(EditText)findViewById(R.id.editTextP);
 
         reg = (TextView) findViewById(R.id.textViewRgs);
@@ -220,28 +220,34 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Loginbtn() {
 
+       // Log.e("token", token);
+
         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setMessage("Signing In...");
         progressDialog.show();
 
-       // final String email = editTextEmail.getText().toString().trim();
+
+
+        final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPass.getText().toString().trim();
 
-        String url="https://demotbs.com/dev/grocery/webservices/login?";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+       // String url="https://demotbs.com/dev/grocery/webservices/login?";
+        String url="https://demotbs.com/dev/grocery/webservices/login?email="+email+"&password="+password+"&device_token="+token;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Log.e("resp",response);
+                      //  Log.e("resp",response);
                         progressDialog.dismiss();
 
                         try {
+
                             JSONObject obj = new JSONObject(response);
                             String success= obj.getString("s");
                             String error= obj.getString("e");
                             String msg=obj.getString("m");
                             String user_id=obj.getString("user_id");
-                            Log.e("uid",user_id);
+                           // Log.e("uid",success);
                            // String name=obj.getString("user_name");
                           //  String email=obj.getString("user_email");
                             String phone=obj.getString("user_phone");
@@ -286,17 +292,19 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "error" + error.getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
-                }) {
-            @Override
+                });
 
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("password", password);
-                params.put("device_token", token);
-                return params;
-            }
-        };
+//        {
+//            @Override
+//
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("email", email);
+//                params.put("password", password);
+//                params.put("device_token", token);
+//                return params;
+//            }
+//        };
 
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(stringRequest);

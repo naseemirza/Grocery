@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -32,7 +33,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
 
     private Context mCtx;
     private List<OrderModel> productList;
-    private TextView pricetxt;
+    //private TextView pricetxt;
 
     public OrderAdapter(Context mCtx, List<OrderModel> productList) {
         this.mCtx = mCtx;
@@ -53,7 +54,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
         final OrderModel product = productList.get(position);
         final String cartID = product.getCartId();
 
-        Log.e("cartid", cartID);
+        //Log.e("cartid", cartID);
 
         Currency currency = Currency.getInstance(product.getCurrency());
         final String symbol = currency.getSymbol();

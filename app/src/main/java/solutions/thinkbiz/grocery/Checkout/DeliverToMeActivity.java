@@ -83,7 +83,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
 
         });
 
-
         radioButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,8 +97,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
 
             }
         });
-
-
 
         nametxt=(EditText)findViewById(R.id.nametxt);
         streettxt=(EditText)findViewById(R.id.streetname);
@@ -223,6 +220,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
                                          progressDialog.dismiss();
                                     }
                                 });
+
 //                        {
 //                            @Override
 //
@@ -237,6 +235,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
 //                                return params;
 //                            }
 //                        };
+
                         RequestQueue requestQueue= Volley.newRequestQueue(DeliverToMeActivity.this);
                         requestQueue.add(stringRequest);
 

@@ -38,6 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button buttonReg;
     ProgressDialog progressDialog;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         token =  FirebaseInstanceId.getInstance().getToken();
-        //Log.d("token", token);
+        Log.d("token", token);
 
         editTextname=(EditText)findViewById(R.id.editTextNm);
         editTextEmail=(EditText)findViewById(R.id.editTextem);

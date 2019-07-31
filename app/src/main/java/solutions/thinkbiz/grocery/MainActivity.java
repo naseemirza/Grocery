@@ -1,10 +1,12 @@
 package solutions.thinkbiz.grocery;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -19,6 +21,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -136,6 +140,7 @@ public class MainActivity extends AppCompatActivity
 
     public static String token;
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,7 +180,7 @@ public class MainActivity extends AppCompatActivity
            // builder.setChannelId(id);
         }
 
-          // token = FirebaseInstanceId.getInstance().getToken();
+
         token =  FirebaseInstanceId.getInstance().getToken();
            Log.d("token", token);
 
@@ -427,7 +432,28 @@ public class MainActivity extends AppCompatActivity
 
         mBottomSheetDialog.show();
 
+        // Hide after some seconds
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (mBottomSheetDialog.isShowing()) {
+                    mBottomSheetDialog.dismiss();
+                }
+            }
+        };
+
+        mBottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        handler.postDelayed(runnable, 6000);
+
     }
+
 
     private void AdvertiseImage(final ImageView image) {
 

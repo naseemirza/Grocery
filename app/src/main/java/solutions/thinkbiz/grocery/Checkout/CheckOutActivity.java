@@ -72,7 +72,7 @@ public class CheckOutActivity extends AppCompatActivity {
         memail = pref.getString("Myemail", "");
         mcontact = pref.getString("Myphone", "");
 
-        //Log.e("name",mname);
+       // Log.e("name",symbol);
        // Log.e("name",memail);
        // Log.e("name",mcontact);
 
@@ -316,7 +316,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
         }
 
-         // Log.e("stotal", String.valueOf(total));
+         // Log.e("stotal", symbol);
         currencytxt.setText(symbol);
         pricetxtt.setText(String.valueOf(total));
 
