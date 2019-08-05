@@ -46,7 +46,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        getSupportActionBar().setTitle("Delivery Address");
+        getSupportActionBar().setTitle("Choose Pay Option");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);

@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        //Log.e("ads", String.valueOf(ads));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String id = "channel_id";
@@ -420,10 +420,10 @@ public class MainActivity extends AppCompatActivity
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ads=false;
+                LoginActivity.ads =false;
                 SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit = pref.edit();
-                edit.putBoolean("Booltype1",ads);
+                edit.putBoolean("Booltype1", LoginActivity.ads);
                 edit.apply();
                // startActivity(new Intent(MainActivity.this,MainActivity.class));
                 mBottomSheetDialog.dismiss();
@@ -438,6 +438,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 if (mBottomSheetDialog.isShowing()) {
+                    LoginActivity.ads =false;
+                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = pref.edit();
+                    edit.putBoolean("Booltype1", LoginActivity.ads);
+                    edit.apply();
                     mBottomSheetDialog.dismiss();
                 }
             }
@@ -451,6 +456,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         handler.postDelayed(runnable, 6000);
+       // LoginActivity.ads =false;
 
     }
 
@@ -520,7 +526,6 @@ public class MainActivity extends AppCompatActivity
                                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                                     .fitCenter()
                                     .into(banner);
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();

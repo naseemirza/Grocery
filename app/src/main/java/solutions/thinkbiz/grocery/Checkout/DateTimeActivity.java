@@ -47,7 +47,7 @@ public class DateTimeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        getSupportActionBar().setTitle("date and Time");
+        getSupportActionBar().setTitle("Select date and time");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);

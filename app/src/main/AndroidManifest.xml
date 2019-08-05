@@ -106,7 +106,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".Checkout.DateTimeForPODActivity"
-            android:parentActivityName=".Checkout.CheckOutActivity"></activity>
+            android:parentActivityName=".Checkout.DeliverToMeActivity"></activity>
         <activity android:name=".Checkout.PayOnDeliveryActivity"
             android:parentActivityName=".Checkout.DeliverToMeActivity"/>
 
