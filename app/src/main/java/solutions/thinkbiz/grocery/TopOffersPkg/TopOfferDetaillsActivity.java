@@ -6,13 +6,20 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.core.view.MenuItemCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +41,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import solutions.thinkbiz.grocery.Checkout.CheckOutActivity;
 import solutions.thinkbiz.grocery.MainActivity;
 import solutions.thinkbiz.grocery.R;
+
 
 public class TopOfferDetaillsActivity extends AppCompatActivity {
 
@@ -47,6 +56,7 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
     int minteger=1;
 
     Button backbtn;
+    TextView Prdnametxt;
 
     ImageView imageView;
     TextView textViewcrncy, textViewprice, textViewDescrp;
@@ -54,6 +64,11 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
     Vibrator vibrator;
     //ProgressDialog progressDialog;
     String prdname,prdid,prdcrncy,prdprice,prdDescrp, prdimg, userId;
+
+    TextView CartItem;
+    int contr=0;
+    int countitem;
+    RelativeLayout CartBtn;
 
 //    private int[] myImageList = new int[]{R.drawable.img11, R.drawable.img11,
 //            R.drawable.img11,R.drawable.img11
@@ -64,7 +79,14 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_offer_detaills);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.detailspagewithcart);
+        View view =getSupportActionBar().getCustomView();
+
+
 
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         userId = pref.getString("user_id", "");
@@ -83,11 +105,58 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
         textViewDescrp=(TextView)findViewById(R.id.prdesc);
         IncreseBtn=(ImageButton)findViewById(R.id.add);
         DecreseBtn=(ImageButton)findViewById(R.id.remov);
+        //Prdnametxt=(TextView)findViewById(R.id.titlename);
+
+        CartItem=(TextView)findViewById(R.id.cartcounter);
+
+        Prdnametxt=(TextView)findViewById(R.id.textname);
+        Prdnametxt.setText(prdname);
+
+        ImageButton imageButton= (ImageButton)view.findViewById(R.id.action_bar_back);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        CartBtn=(RelativeLayout)findViewById(R.id.CartRltv);
+        CartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if ((contr+countitem)>0){
+                    String actname="My Cart";
+                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = pref.edit();
+                    edit.putString("Actvname",actname);
+                    edit.apply();
+                    Intent intent = new Intent(TopOfferDetaillsActivity.this, CheckOutActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(TopOfferDetaillsActivity.this,"No Item Added",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+//        ImageButton imageButton2= (ImageButton)view.findViewById(R.id.action_bar_forward);
+//
+//        imageButton2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                startActivity(new Intent(JobsActivity.this,JobsFilterActivity.class));
+//            }
+//        });
+
 
         addtocart=(Button)findViewById(R.id.Addtocart);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-        getSupportActionBar().setTitle(prdname);
+        //getSupportActionBar().setTitle(prdname);
         textViewcrncy.setText(prdcrncy);
         textViewprice.setText(prdprice);
         textViewDescrp.setText(prdDescrp);
@@ -127,6 +196,54 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
                 startActivity(new Intent(TopOfferDetaillsActivity.this, MainActivity.class));
             }
         });
+
+
+
+        getCount();
+
+//        CartBtn=(RelativeLayout)findViewById(R.id.CartRltv);
+//        CartBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if ((contr+countitem)>0){
+//                    String actname="My Cart";
+//                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor edit = pref.edit();
+//                    edit.putString("Actvname",actname);
+//                    edit.apply();
+//                    Intent intent = new Intent(TopOfferDetaillsActivity.this, CheckOutActivity.class);
+//                    startActivity(intent);
+//                }
+//                else {
+//                    Toast.makeText(TopOfferDetaillsActivity.this,"No Item Added",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+    }
+
+    private void getCount() {
+
+        String url="https://demotbs.com/dev/grocery/webservices/count_cart?user_id="+userId;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        countitem= Integer.parseInt(response);
+                         CartItem.setText(String.valueOf(countitem));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("TAg",error.getMessage());
+                    }
+                });
+
+        RequestQueue mRequestQueue2 = Volley.newRequestQueue(this);
+        mRequestQueue2.add(stringRequest);
     }
 
 
@@ -167,11 +284,13 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
                             if (success.equalsIgnoreCase("1"))
                             {
                                 Toast.makeText(TopOfferDetaillsActivity.this, msg, Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(TopOfferDetaillsActivity.this, MainActivity.class));
+                                //startActivity(new Intent(TopOfferDetaillsActivity.this, TopOfferDetaillsActivity.class));
+                                getCount();
                             }
                             else
                             {
                                 Toast.makeText(TopOfferDetaillsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(TopOfferDetaillsActivity.this, TopOfferDetaillsActivity.class));
                             }
 
                         } catch (JSONException e) {
@@ -270,5 +389,21 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
 //            }
 //        });
 //
+//    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        MenuItem item = menu.findItem(R.id.badge);
+//        MenuItemCompat.setActionView(item, R.layout.carticonmenu);
+//        RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
+//        CartItem=(TextView)notifCount.findViewById(R.id.cartcounter);
+//        CartItem.setText(String.valueOf(countitem));
+//
+//
+//       // TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
+//       // tv.setText("12");
+//
+//        return super.onCreateOptionsMenu(menu);
 //    }
 }

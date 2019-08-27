@@ -71,62 +71,69 @@ public class DeliverToMeActivity extends AppCompatActivity {
         radioButton2 = (RadioButton) findViewById(R.id.rb2);
         radioButton3 = (RadioButton) findViewById(R.id.rb3);
 
-        radioButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit = pref.edit();
-                edit.putString("Tprice", price);
-
-                edit.apply();
-                Intent intent = new Intent(DeliverToMeActivity.this, PaypalActivity.class);
-                startActivity(intent);
-
-            }
-
-        });
-
-        radioButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit = pref.edit();
-                edit.putString("Tprice", price);
-
-                edit.apply();
-                Intent intent=new Intent(DeliverToMeActivity.this, DateTimeActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        radioButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Date todaysdate = new Date();
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-                String date1 = format.format(todaysdate);
-
-
-
-                    Senddata1(date1);
-
-
-//                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor edit = pref.edit();
-//                edit.putString("Tprice", price);
+//        radioButton1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 //
-//                edit.apply();
-//                Intent intent=new Intent(DeliverToMeActivity.this, DateTimeForPODActivity.class);
-//                startActivity(intent);
+//                if(isValidate()){
+//
+//                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor edit = pref.edit();
+//                    edit.putString("Tprice", price);
+//
+//                    edit.apply();
+//                    Intent intent = new Intent(DeliverToMeActivity.this, PaypalActivity.class);
+//                    startActivity(intent);
+//
+//                }
+//
+//            }
+//
+//        });
 
-            }
+//        radioButton2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(isValidate()){
+//
+//                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor edit = pref.edit();
+//                    edit.putString("Tprice", price);
+//
+//                    edit.apply();
+//                    Intent intent=new Intent(DeliverToMeActivity.this, DateTimeActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
 
-
-        });
+//        radioButton3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Date todaysdate = new Date();
+//                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+//                String date1 = format.format(todaysdate);
+//
+//                if(isValidate())
+//                {
+//                    Senddata1(date1);
+//                }
+//
+//
+////                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+////                SharedPreferences.Editor edit = pref.edit();
+////                edit.putString("Tprice", price);
+////
+////                edit.apply();
+////                Intent intent=new Intent(DeliverToMeActivity.this, DateTimeForPODActivity.class);
+////                startActivity(intent);
+//
+//            }
+//
+//
+//        });
 
         nametxt=(EditText)findViewById(R.id.nametxt);
         streettxt=(EditText)findViewById(R.id.streetname);
@@ -147,18 +154,59 @@ public class DeliverToMeActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isValidate())
+
+                if (radioButton1.isChecked()&&isValidate())
                 {
-                    Senddata();
+
+                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = pref.edit();
+                    edit.putString("Tprice", price);
+
+                    edit.apply();
+                    Intent intent = new Intent(DeliverToMeActivity.this, PaypalActivity.class);
+                    startActivity(intent);
                 }
+                else if (radioButton2.isChecked()&&isValidate())
+                {
+                    //Senddata();
+                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = pref.edit();
+                    edit.putString("Tprice", price);
+
+                    edit.apply();
+                    Intent intent=new Intent(DeliverToMeActivity.this, DateTimeActivity.class);
+                    startActivity(intent);
+
+                }
+                else if (radioButton3.isChecked()&&isValidate())
+                {
+                    //Senddata();
+                    Date todaysdate = new Date();
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                    String date1 = format.format(todaysdate);
+                    Senddata1(date1);
+
+                }
+
+                //Senddata();
+
+//                if(isValidate())
+//                {
+//                    Senddata();
+//                }
             }
         });
 
     }
 
-
     private boolean isValidate()
     {
+        if (radioGroup.getCheckedRadioButtonId() == -1) {
+            radioButton1.setError("Please select one option");
+            radioGroup.requestFocus();
+            return false;
+        }
+
         if (nametxt.getText().toString().length() == 0) {
             nametxt.setError("Please enter your name");
             nametxt.requestFocus();
@@ -225,7 +273,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
                                                 edit.putString("street",street);
                                                 edit.putString("town",town);
                                                 edit.putString("pincode",pincode);
-                                                edit.putString("phone",contact);
+                                                edit.putString("Myphone",contact);
                                                 edit.apply();
 
                                                 Toast.makeText(DeliverToMeActivity.this, msg, Toast.LENGTH_SHORT).show();

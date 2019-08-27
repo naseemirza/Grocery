@@ -8,6 +8,60 @@
     xmlns:tool="http://schemas.android.com/tools"
     tools:context="solutions.thinkbiz.grocery.TopOffersPkg.TopOfferDetaillsActivity">
 
+    <!--<com.google.android.material.appbar.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<androidx.appcompat.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/CartRltv"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:clickable="false">-->
+
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/imgcart"-->
+                        <!--android:layout_width="45dp"-->
+                        <!--android:layout_height="45dp"-->
+                        <!--android:layout_margin="10dp"-->
+                        <!--android:background="@drawable/cart"-->
+                        <!--android:clickable="false"-->
+                        <!--tool:layout_editor_absoluteX="7dp"-->
+                        <!--tool:layout_editor_absoluteY="16dp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/cartcounter"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentTop="true"-->
+                        <!--android:layout_centerHorizontal="true"-->
+                        <!--android:layout_marginTop="1dp"-->
+                        <!--android:background="@drawable/round_textview"-->
+                        <!--android:clickable="false"-->
+                        <!--android:gravity="center"-->
+                        <!--android:paddingStart="10dp"-->
+                        <!--android:text="0"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+
+                <!--</RelativeLayout>-->
+            <!--</RelativeLayout>-->
+
+        <!--</androidx.appcompat.widget.Toolbar>-->
+
+    <!--</com.google.android.material.appbar.AppBarLayout>-->
+
 
     <ScrollView
         android:id="@+id/scrolview"
@@ -54,10 +108,22 @@
             <!--app:snap="false" />-->
     </RelativeLayout>
 
+            <!--<TextView-->
+                <!--android:id="@+id/titlename"-->
+                <!--android:text="prd name"-->
+                <!--android:paddingStart="10dp"-->
+                <!--android:paddingEnd="10dp"-->
+                <!--android:textColor="@color/colorBlack"-->
+                <!--android:textSize="15sp"-->
+                <!--android:layout_below="@+id/imgslider"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
     <LinearLayout
         android:id="@+id/Liprdesc"
         android:layout_below="@+id/imgslider"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

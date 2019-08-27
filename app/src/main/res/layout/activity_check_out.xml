@@ -7,33 +7,33 @@
     tools:context="solutions.thinkbiz.grocery.Checkout.CheckOutActivity">
 
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:weightSum="2"
-        android:id="@+id/radioGroup">
+    <!--<RadioGroup-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="30dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:weightSum="2"-->
+        <!--android:id="@+id/radioGroup">-->
 
-        <RadioButton
-            android:id="@+id/rb1"
-            android:buttonTint="@color/maincolor"
-            android:text="Deliver to me"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <!--<RadioButton-->
+            <!--android:id="@+id/rb1"-->
+            <!--android:buttonTint="@color/maincolor"-->
+            <!--android:text="Deliver to me"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
 
-        <RadioButton
-            android:id="@+id/rb2"
-            android:buttonTint="@color/maincolor"
-            android:text="Collect in store"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <!--<RadioButton-->
+            <!--android:id="@+id/rb2"-->
+            <!--android:buttonTint="@color/maincolor"-->
+            <!--android:text="Collect in store"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
 
 
-    </RadioGroup>
+    <!--</RadioGroup>-->
 
     <androidx.recyclerview.widget.RecyclerView
 
@@ -42,7 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:layout_marginTop="20dp"
         android:scrollbars="horizontal">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -58,7 +57,7 @@
 
     <include
         android:id="@+id/footr"
-        layout="@layout/footerbtn" />
+        layout="@layout/checkoutfooter" />
 
 
 </RelativeLayout>

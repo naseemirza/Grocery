@@ -6,4 +6,12 @@
         <!--android:orderInCategory="100"-->
         <!--android:title="@string/action_settings"-->
         <!--app:showAsAction="never" />-->
+
+    <!--<item-->
+        <!--android:id="@+id/badge"-->
+        <!--android:actionLayout="@layout/carticonmenu"-->
+        <!--android:icon="@drawable/cart"-->
+        <!--app:showAsAction="always"-->
+        <!--android:title="">-->
+    <!--</item>-->
 </menu>

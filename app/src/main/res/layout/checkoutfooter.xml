@@ -9,46 +9,38 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:weightSum="2">
+        android:orientation="vertical">
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="40dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:layout_weight="1"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/bordercolor"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:gravity="end"
                 android:text="Total:"
-                android:layout_weight="1"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/crncytype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
                 android:layout_marginStart="3dp"
+                android:gravity="end"
                 android:text="@string/crncy"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -56,11 +48,10 @@
                 android:id="@+id/pricetotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="start"
                 android:paddingStart="5dp"
                 android:text="amount"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -77,24 +68,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:weightSum="2"
                 android:id="@+id/radioGroup">
 
                 <RadioButton
                     android:id="@+id/rb1"
-                    android:buttonTint="@color/maincolor"
-                    android:text="Continue Shopping"
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/maincolor"
+                    android:buttonTint="@color/colorWhite"
+                    android:text="Continue Shopping"
+
+                    android:textColor="@color/colorWhite" />
 
                 <RadioButton
                     android:id="@+id/rb2"
-                    android:buttonTint="@color/maincolor"
+                    android:buttonTint="@color/colorWhite"
                     android:text="Proceed to checkout"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/maincolor"
+                    android:textColor="@color/colorWhite"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
