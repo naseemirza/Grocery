@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:weightSum="2"
         android:id="@+id/radioGroup">
@@ -26,6 +26,14 @@
 
         <RadioButton
             android:id="@+id/rb2"
+            android:buttonTint="@color/maincolor"
+            android:text="Collect in store"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb3"
             android:buttonTint="@color/maincolor"
             android:text="Pay on delivery"
             android:layout_weight="1"

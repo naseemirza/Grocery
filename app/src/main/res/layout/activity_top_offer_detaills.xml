@@ -190,4 +190,8 @@
 
     </ScrollView>
 
+    <include
+        android:id="@+id/footr"
+        layout="@layout/backfooter" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

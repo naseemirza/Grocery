@@ -19,5 +19,6 @@
     <!--Some grocery stores (especially large ones) form the centerpiece of a larger complex that includes other facilities,-->
     <!--such as gas stations, which will often operate under the store's name.</string>-->
     <string name="mail">Complete action using</string>
+    <string name="crncy">₹</string>
 
 </resources>

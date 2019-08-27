@@ -30,8 +30,8 @@ public class PayOnDeliveryActivity extends AppCompatActivity {
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         OrderoId = pref.getString("OrderId", "");
 
-        txtid=(TextView)findViewById(R.id.txtid);
-        txtid.setText(OrderoId);
+        //txtid=(TextView)findViewById(R.id.txtid);
+       // txtid.setText(OrderoId);
         button=(Button)findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {

@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import solutions.thinkbiz.grocery.MainActivity;
 import solutions.thinkbiz.grocery.PaypalActivity;
 import solutions.thinkbiz.grocery.R;
 
@@ -98,14 +99,17 @@ public class CheckOutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit = pref.edit();
-                edit.putString("Tprice", String.valueOf(total));
+                 Intent intent=new Intent(CheckOutActivity.this, MainActivity.class);
+                 startActivity(intent);
 
-                edit.apply();
+               // SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+               // SharedPreferences.Editor edit = pref.edit();
+               // edit.putString("Tprice", String.valueOf(total));
 
-                Intent intent=new Intent(CheckOutActivity.this, DeliverToMeActivity.class);
-                startActivity(intent);
+               //edit.apply();
+
+               // Intent intent=new Intent(CheckOutActivity.this, DeliverToMeActivity.class);
+               // startActivity(intent);
 
             }
 
@@ -115,30 +119,35 @@ public class CheckOutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+               // Intent intent=new Intent(CheckOutActivity.this, DeliverToMeActivity.class);
+               // startActivity(intent);
+
                 SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit = pref.edit();
                 edit.putString("Tprice", String.valueOf(total));
 
                 edit.apply();
-                Intent intent=new Intent(CheckOutActivity.this, DateTimeActivity.class);
+                Intent intent=new Intent(CheckOutActivity.this, DeliverToMeActivity.class);
                 startActivity(intent);
+//                Intent intent=new Intent(CheckOutActivity.this, DateTimeActivity.class);
+//                startActivity(intent);
 
             }
         });
 
-        continuebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit = pref.edit();
-                edit.putString("Tprice", String.valueOf(total));
-
-                edit.apply();
-                Intent intent = new Intent(CheckOutActivity.this, PaypalActivity.class);
-                startActivity(intent);
-                //intent.putExtra("Tprice", String.valueOf(total));
-            }
-        });
+//        continuebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor edit = pref.edit();
+//                edit.putString("Tprice", String.valueOf(total));
+//
+//                edit.apply();
+//                Intent intent = new Intent(CheckOutActivity.this, PaypalActivity.class);
+//                startActivity(intent);
+//                //intent.putExtra("Tprice", String.valueOf(total));
+//            }
+//        });
 
         mExampleList1 = new ArrayList<>();
         mRequestQueue1 = Volley.newRequestQueue(this);

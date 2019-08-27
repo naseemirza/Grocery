@@ -46,6 +46,8 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
     ImageButton IncreseBtn,DecreseBtn;
     int minteger=1;
 
+    Button backbtn;
+
     ImageView imageView;
     TextView textViewcrncy, textViewprice, textViewDescrp;
     Button addtocart;
@@ -117,6 +119,14 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        backbtn=(Button)findViewById(R.id.backtbn);
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TopOfferDetaillsActivity.this, MainActivity.class));
+            }
+        });
     }
 
 
@@ -134,6 +144,7 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
        TextView displayInteger = (TextView) findViewById(R.id.editqnty);
         displayInteger.setText("" + number);
     }
+
 
 
 
