@@ -25,6 +25,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import solutions.thinkbiz.grocery.PaypalActivity;
 import solutions.thinkbiz.grocery.R;
 
@@ -102,20 +105,27 @@ public class DeliverToMeActivity extends AppCompatActivity {
         radioButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(isValidate())
-//                {
-//                    Senddata1();
-//                }
+
+                Date todaysdate = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                String date1 = format.format(todaysdate);
+
+
+
+                    Senddata1(date1);
+
 
 //                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 //                SharedPreferences.Editor edit = pref.edit();
 //                edit.putString("Tprice", price);
 //
-//                edit.apply();                                                 //DateTimeForPODActivity
-                Intent intent=new Intent(DeliverToMeActivity.this, PayOnDeliveryActivity.class);
-                startActivity(intent);
+//                edit.apply();
+//                Intent intent=new Intent(DeliverToMeActivity.this, DateTimeForPODActivity.class);
+//                startActivity(intent);
 
             }
+
+
         });
 
         nametxt=(EditText)findViewById(R.id.nametxt);
@@ -145,6 +155,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
         });
 
     }
+
 
     private boolean isValidate()
     {
@@ -261,56 +272,58 @@ public class DeliverToMeActivity extends AppCompatActivity {
 
     }
 
-//    private void Senddata1() {
-//
-//        progressDialog = new ProgressDialog(DeliverToMeActivity.this);
-//        progressDialog.setMessage("Please wait...");
-//        progressDialog.show();
-//
-//       // final String datetxt=txtDate.getText().toString();
-//       // final String timetxt=txtTime.getText().toString();
-//       // final String datetimetxt=datetxt+" "+timetxt;
-//
-//        String url1="https://demotbs.com/dev/grocery/webservices/cash_on_delivery?user_id="+userId+"&total_amount="+price;
-//        //String url="https://demotbs.com/dev/grocery/webservices/cash_on_delivery?user_id="+userId+"&date_time="+datetimetxt+"&total_amount="+price;
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET,url1,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        //Log.e("resp",response);
-//                        progressDialog.dismiss();
-//                        try {
-//                            JSONObject obj = new JSONObject(response);
-//                            String msg=obj.getString("status");
-//                            String orderid=obj.getString("order_id");
-//
-//                            Toast.makeText(DeliverToMeActivity.this, msg, Toast.LENGTH_SHORT).show();
-//                            //startActivity(new Intent(DateTimeActivity.this,StoreRespActivity.class));
+    private void Senddata1(String date1) {
+
+       // Log.e("date",date1);
+
+        progressDialog = new ProgressDialog(DeliverToMeActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+
+       // final String datetxt=txtDate.getText().toString();
+       // final String timetxt=txtTime.getText().toString();
+       // final String datetimetxt=datetxt+" "+timetxt;
+
+        //String url1="https://demotbs.com/dev/grocery/webservices/cash_on_delivery?user_id="+userId+"&total_amount="+price;
+        String url="https://demotbs.com/dev/grocery/webservices/cash_on_delivery?user_id="+userId+"&date_time="+date1+"&total_amount="+price;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Log.e("resp",response);
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            String msg=obj.getString("status");
+                            String orderid=obj.getString("order_id");
+
+                            Toast.makeText(DeliverToMeActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(DateTimeActivity.this,StoreRespActivity.class));
 //                            SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 //                            SharedPreferences.Editor edit = pref.edit();
 //                            edit.putString("OrderId", orderid);
 //
 //                            edit.apply();
-//                            Intent intent = new Intent(DeliverToMeActivity.this, PayOnDeliveryActivity.class);
-//                            startActivity(intent);
-//                            progressDialog.dismiss();
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            Toast.makeText(DeliverToMeActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
-//                            progressDialog.dismiss();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(DeliverToMeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//                        progressDialog.dismiss();
-//                    }
-//                });
-//        RequestQueue requestQueue= Volley.newRequestQueue(DeliverToMeActivity.this);
-//        requestQueue.add(stringRequest);
-//
-//    }
+                            Intent intent = new Intent(DeliverToMeActivity.this, PayOnDeliveryActivity.class);
+                            startActivity(intent);
+                            progressDialog.dismiss();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(DeliverToMeActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(DeliverToMeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                });
+        RequestQueue requestQueue= Volley.newRequestQueue(DeliverToMeActivity.this);
+        requestQueue.add(stringRequest);
+
+    }
 }

@@ -108,7 +108,7 @@
         <activity android:name=".Checkout.DateTimeForPODActivity"
             android:parentActivityName=".Checkout.DeliverToMeActivity"></activity>
         <activity android:name=".Checkout.PayOnDeliveryActivity"
-            android:parentActivityName=".Checkout.DeliverToMeActivity"/>
+            android:parentActivityName=".MainActivity"/>
 
         <service android:name=".MyFirebaseMessagingService"
             android:stopWithTask="false">

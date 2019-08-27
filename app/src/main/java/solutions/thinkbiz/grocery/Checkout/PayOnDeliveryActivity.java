@@ -17,7 +17,7 @@ import solutions.thinkbiz.grocery.R;
 public class PayOnDeliveryActivity extends AppCompatActivity {
 
     Button button;
-    String OrderoId;
+   // String OrderoId;
     TextView txtid;
 
     @Override
@@ -28,10 +28,10 @@ public class PayOnDeliveryActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        OrderoId = pref.getString("OrderId", "");
+        //OrderoId = pref.getString("OrderId", "");
 
         //txtid=(TextView)findViewById(R.id.txtid);
-       // txtid.setText(OrderoId);
+        //txtid.setText(OrderoId);
         button=(Button)findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
