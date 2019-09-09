@@ -31,7 +31,7 @@ public class PaypalActivity extends AppCompatActivity {
 
         mywebview = (WebView) findViewById(R.id.webView1);
         mywebview.setWebViewClient(new MyWebViewClient());
-        String url="https://demotbs.com/dev/grocery/webservices/buy?user_id="+userId+"&price="+price;
+        String url="http://memorstoreonline.com/webservices/buy?user_id="+userId+"&price="+price;
         mywebview.getSettings().setJavaScriptEnabled(true);
         mywebview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         mywebview.loadUrl(url);
@@ -43,9 +43,6 @@ public class PaypalActivity extends AppCompatActivity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
-//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//            startActivity(intent);
-//            return true;
         }
 
         @Override

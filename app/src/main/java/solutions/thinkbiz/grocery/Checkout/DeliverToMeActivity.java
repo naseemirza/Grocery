@@ -41,6 +41,9 @@ public class DeliverToMeActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioButton1,radioButton2, radioButton3;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +55,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Choose Pay Option");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         userId = pref.getString("user_id", "");
         price = pref.getString("Tprice", "");
 
@@ -63,7 +66,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
         contact = pref.getString("Myphone", "");
         //contact1 = pref.getString("phone", "");
 
-
         //Log.e("uid",userId);
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -71,69 +73,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
         radioButton2 = (RadioButton) findViewById(R.id.rb2);
         radioButton3 = (RadioButton) findViewById(R.id.rb3);
 
-//        radioButton1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if(isValidate()){
-//
-//                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor edit = pref.edit();
-//                    edit.putString("Tprice", price);
-//
-//                    edit.apply();
-//                    Intent intent = new Intent(DeliverToMeActivity.this, PaypalActivity.class);
-//                    startActivity(intent);
-//
-//                }
-//
-//            }
-//
-//        });
-
-//        radioButton2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if(isValidate()){
-//
-//                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor edit = pref.edit();
-//                    edit.putString("Tprice", price);
-//
-//                    edit.apply();
-//                    Intent intent=new Intent(DeliverToMeActivity.this, DateTimeActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
-
-//        radioButton3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Date todaysdate = new Date();
-//                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-//                String date1 = format.format(todaysdate);
-//
-//                if(isValidate())
-//                {
-//                    Senddata1(date1);
-//                }
-//
-//
-////                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-////                SharedPreferences.Editor edit = pref.edit();
-////                edit.putString("Tprice", price);
-////
-////                edit.apply();
-////                Intent intent=new Intent(DeliverToMeActivity.this, DateTimeForPODActivity.class);
-////                startActivity(intent);
-//
-//            }
-//
-//
-//        });
 
         nametxt=(EditText)findViewById(R.id.nametxt);
         streettxt=(EditText)findViewById(R.id.streetname);
@@ -147,7 +86,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
         pincodetxt.setText(pincode);
         contacttxt.setText(contact);
 
-        //contacttxt.setText(contact1);
 
         submit=(Button)findViewById(R.id.buttonSt);
 
@@ -155,11 +93,20 @@ public class DeliverToMeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                 pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                 edit = pref.edit();
+                edit.putString("Myname",name);
+                edit.putString("street",street);
+                edit.putString("town",town);
+                edit.putString("pincode",pincode);
+                edit.putString("Myphone",contact);
+                edit.apply();
+
                 if (radioButton1.isChecked()&&isValidate())
                 {
 
-                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor edit = pref.edit();
+                     pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                     edit = pref.edit();
                     edit.putString("Tprice", price);
 
                     edit.apply();
@@ -169,8 +116,8 @@ public class DeliverToMeActivity extends AppCompatActivity {
                 else if (radioButton2.isChecked()&&isValidate())
                 {
                     //Senddata();
-                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor edit = pref.edit();
+                     pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                     edit = pref.edit();
                     edit.putString("Tprice", price);
 
                     edit.apply();
@@ -180,20 +127,13 @@ public class DeliverToMeActivity extends AppCompatActivity {
                 }
                 else if (radioButton3.isChecked()&&isValidate())
                 {
-                    //Senddata();
+
                     Date todaysdate = new Date();
                     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                     String date1 = format.format(todaysdate);
                     Senddata1(date1);
-
+                    Senddata();
                 }
-
-                //Senddata();
-
-//                if(isValidate())
-//                {
-//                    Senddata();
-//                }
             }
         });
 
@@ -252,7 +192,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
         final String contact=contacttxt.getText().toString();
 
      //   Log.e("name", userId);
-        String url="https://demotbs.com/dev/grocery/webservices/shipping_address?user_id="+userId+"&name="+name+"&street_name="+street+"&town="+town+"&postal_code="+pincode+"&contact_number="+contact;
+        String url="http://memorstoreonline.com/webservices/shipping_address?user_id="+userId+"&name="+name+"&street_name="+street+"&town="+town+"&postal_code="+pincode+"&contact_number="+contact;
                         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                                 new Response.Listener<String>() {
                                     @Override
@@ -267,8 +207,8 @@ public class DeliverToMeActivity extends AppCompatActivity {
 
                                             if (success.equalsIgnoreCase("1"))
                                             {
-                                                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                                                SharedPreferences.Editor edit = pref.edit();
+                                                pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                                                 edit = pref.edit();
                                                 edit.putString("Myname",name);
                                                 edit.putString("street",street);
                                                 edit.putString("town",town);
@@ -277,7 +217,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
                                                 edit.apply();
 
                                                 Toast.makeText(DeliverToMeActivity.this, msg, Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(DeliverToMeActivity.this, PaypalActivity.class));
+                                               // startActivity(new Intent(DeliverToMeActivity.this, PaypalActivity.class));
                                                 progressDialog.dismiss();
 
                                             }
@@ -300,21 +240,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
                                     }
                                 });
 
-//                        {
-//                            @Override
-//
-//                            protected Map<String, String> getParams() throws AuthFailureError {
-//                                Map<String, String> params = new HashMap<>();
-//                                params.put("user_id", userId);
-//                                params.put("name", name);
-//                                params.put("street_name", street);
-//                                params.put("town", town);
-//                                params.put("postal_code", pincode);
-//                                params.put("contact_number", contact);
-//                                return params;
-//                            }
-//                        };
-
                         RequestQueue requestQueue= Volley.newRequestQueue(DeliverToMeActivity.this);
                         requestQueue.add(stringRequest);
 
@@ -328,12 +253,7 @@ public class DeliverToMeActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
-       // final String datetxt=txtDate.getText().toString();
-       // final String timetxt=txtTime.getText().toString();
-       // final String datetimetxt=datetxt+" "+timetxt;
-
-        //String url1="https://demotbs.com/dev/grocery/webservices/cash_on_delivery?user_id="+userId+"&total_amount="+price;
-        String url="https://demotbs.com/dev/grocery/webservices/cash_on_delivery?user_id="+userId+"&date_time="+date1+"&total_amount="+price;
+        String url="http://memorstoreonline.com/webservices/cash_on_delivery?user_id="+userId+"&date_time="+date1+"&total_amount="+price;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
                     @Override
@@ -346,12 +266,6 @@ public class DeliverToMeActivity extends AppCompatActivity {
                             String orderid=obj.getString("order_id");
 
                             Toast.makeText(DeliverToMeActivity.this, msg, Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(DateTimeActivity.this,StoreRespActivity.class));
-//                            SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                            SharedPreferences.Editor edit = pref.edit();
-//                            edit.putString("OrderId", orderid);
-//
-//                            edit.apply();
                             Intent intent = new Intent(DeliverToMeActivity.this, PayOnDeliveryActivity.class);
                             startActivity(intent);
                             progressDialog.dismiss();

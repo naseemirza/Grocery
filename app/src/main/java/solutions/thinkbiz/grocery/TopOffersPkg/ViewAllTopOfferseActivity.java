@@ -43,7 +43,7 @@ public class ViewAllTopOfferseActivity extends AppCompatActivity {
         mRequestQueue1 = Volley.newRequestQueue(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerviewtop);
         recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3,RecyclerView.VERTICAL,false));
         recyclerView.setHasFixedSize(true);
 
         parseJSON1();

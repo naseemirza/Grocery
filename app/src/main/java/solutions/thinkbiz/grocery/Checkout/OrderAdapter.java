@@ -33,7 +33,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
 
     private Context mCtx;
     private List<OrderModel> productList;
-    //private TextView pricetxt;
 
     public OrderAdapter(Context mCtx, List<OrderModel> productList) {
         this.mCtx = mCtx;
@@ -54,14 +53,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
         final OrderModel product = productList.get(position);
         final String cartID = product.getCartId();
 
-        //Log.e("cartid", cartID);
-
         Currency currency = Currency.getInstance(product.getCurrency());
         final String symbol = currency.getSymbol();
 
         holder.textViewTitle.setText(product.getName());
         holder.textViewcurrncy.setText(symbol);
-        //  holder.textViewprice.setText(product.getPrice());
         final String textprice= String.valueOf(productList.get(position).getTotalprice());
         holder.textViewprice.setText(textprice);
         holder.textViewQty.setText(product.getQuantity());
@@ -112,69 +108,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
             }
         });
 
-
-//        holder.add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//               int qtyadd= Integer.parseInt(product.getQuantity());
-//                qtyadd= qtyadd+1;
-//                holder.textViewQty.setText(String.valueOf(""+ qtyadd));
-//                product.setQuantity(String.valueOf(qtyadd));
-////                SharedPreferences pref = mCtx.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-////                SharedPreferences.Editor edit = pref.edit();
-////                edit.putString("qty", String.valueOf(qty));
-////                edit.apply();
-////
-////                long result =((CheckOutActivity)mCtx).AddMethod(qtyadd);
-////                if (result == 1) {
-////                    SharedPreferences pref = mCtx.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-////                    qtyadd= Integer.parseInt(pref.getString("qty", ""));
-////                    //Log.e("qty", String.valueOf(qtyadd));
-////
-////                    holder.textViewQty.setText(String.valueOf(""+ qtyadd));
-////                    product.setQuantity(String.valueOf(qtyadd));
-////                }
-//
-//
-//               // ((CheckOutActivity)mCtx).AddMethod(cartID,qty);
-////                long result =  ((CheckOutActivity)mCtx).AddMethod(cartID,qty);
-////                if (result == 1) {
-////                    holder.textViewQty.setText(String.valueOf(""+ qty));
-////                    product.setQuantity(String.valueOf(qty));
-////                   // Log.e("qty", String.valueOf(qty));
-////                    //Toast.makeText(mCtx, "Updated successfully!", Toast.LENGTH_SHORT).show();
-////                }
-////                else {
-////                    Toast.makeText(mCtx, "Not Updated", Toast.LENGTH_SHORT).show();
-////                }
-//            }
-//        });
-//
-//        holder.remove.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int qtymins= Integer.parseInt(product.getQuantity());
-//
-//                if (qtymins>1) {
-//                    qtymins = qtymins - 1;
-//                    holder.textViewQty.setText(String.valueOf(""+ qtymins));
-//                    product.setQuantity(String.valueOf(qtymins));
-//
-//                   // long result =  ((CheckOutActivity)mCtx).RemoveMethod(cartID,qty1);
-//
-////                    if (result == 1) {
-////                        holder.textViewQty.setText(String.valueOf(""+ qty1));
-////                        product.setQuantity(String.valueOf(qty1));
-////                        Toast.makeText(mCtx, "Updated successfully!", Toast.LENGTH_SHORT).show();
-////                    } else {
-////                        Toast.makeText(mCtx, "Not Updated", Toast.LENGTH_SHORT).show();
-////                    }
-//
-//                }
-//            }
-//        });
-//
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,13 +121,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ProductViewH
 
     }
 
-
     @Override
     public int getItemCount() {
         return productList.size();
     }
-
-
 
     public class ProductViewHolder extends RecyclerView.ViewHolder  {
         TextView textViewprice;

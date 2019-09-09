@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         token =  FirebaseInstanceId.getInstance().getToken();
-        Log.d("token", token);
+        //Log.d("token", token);
 
         editTextname=(EditText)findViewById(R.id.editTextNm);
         editTextEmail=(EditText)findViewById(R.id.editTextem);
@@ -136,7 +136,8 @@ public class RegisterActivity extends AppCompatActivity {
         final String phone = editTextPhn.getText().toString().trim();
         final String password = editTextPass.getText().toString().trim();
 
-        String url="https://demotbs.com/dev/grocery/webservices/registration?";
+       // String url="https://demotbs.com/dev/grocery/webservices/registration?";
+        String url="http://memorstoreonline.com/webservices/registration?";
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
                     @Override
@@ -162,11 +163,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                                 progressDialog.dismiss();
-                                editTextname.setText("");
-                                editTextEmail.setText("");
-                                editTextPhn.setText("");
-                                editTextPass.setText("");
-                                editTextConfPass.setText("");
+                              //  editTextname.setText("");
+                               // editTextEmail.setText("");
+                               // editTextPhn.setText("");
+                               // editTextPass.setText("");
+                               // editTextConfPass.setText("");
 
                             }
                             else {

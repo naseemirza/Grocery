@@ -156,7 +156,7 @@ public class DateTimeForPODActivity extends AppCompatActivity {
         final String datetimetxt=datetxt+" "+timetxt;
 
 
-        String url="https://demotbs.com/dev/grocery/webservices/cash_on_delivery?user_id="+userId+"&date_time="+datetimetxt+"&total_amount="+price;
+        String url="http://memorstoreonline.com/webservices/cash_on_delivery?user_id="+userId+"&date_time="+datetimetxt+"&total_amount="+price;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
                     @Override

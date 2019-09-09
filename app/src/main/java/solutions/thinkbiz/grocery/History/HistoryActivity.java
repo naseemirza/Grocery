@@ -59,19 +59,17 @@ public class HistoryActivity extends AppCompatActivity {
         mRequestQueue1 = Volley.newRequestQueue(this);
         mRecyclerview1=(RecyclerView)findViewById(R.id.myRecyclerID);
         mRecyclerview1.setNestedScrollingEnabled(false);
-        mRecyclerview1.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mRecyclerview1.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
         mRecyclerview1.setHasFixedSize(true);
 
         parseJSON1();
     }
 
-    //+Id
-
     private void parseJSON1() {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
-        String url="https://demotbs.com/dev/grocery/webservices/getAllorder_item?order_id="+Id;
+        String url="http://memorstoreonline.com/webservices/getAllorder_item?order_id="+Id;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

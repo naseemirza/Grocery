@@ -55,13 +55,8 @@ public class EditTextActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-//        getSupportActionBar().setTitle("Register Page");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         SharedPreferences pref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-
         pname = pref.getString("name", "");
-
         editTextSearch=(AutoCompleteTextView)findViewById(R.id.autoCompleteTextView1);
 
         imageview = (ImageView)findViewById(R.id.imageView1);
@@ -83,7 +78,7 @@ public class EditTextActivity extends AppCompatActivity {
         mExampleList = new ArrayList<>();
         sRecyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         sRecyclerview.setNestedScrollingEnabled(false);
-        sRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        sRecyclerview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         mRequestQueue = Volley.newRequestQueue(this);
         sRecyclerview.setHasFixedSize(true);
 
@@ -92,7 +87,7 @@ public class EditTextActivity extends AppCompatActivity {
 
     private void parseJSON() {
 
-        String url="https://demotbs.com/dev/grocery/webservices/searchdata?search="+pname;
+        String url="http://memorstoreonline.com/webservices/searchdata?search="+pname;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

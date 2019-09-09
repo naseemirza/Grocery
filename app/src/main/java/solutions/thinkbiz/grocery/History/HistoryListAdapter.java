@@ -49,8 +49,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         symbol = pref.getString("crncy", "");
         price = pref.getString("Tprice", "");
 
-        //Log.e("uid",userId);
-        Log.e("price",price);
+       // Log.e("price",price);
 
 
         //Currency currency = Currency.getInstance(product.getmCurrency());

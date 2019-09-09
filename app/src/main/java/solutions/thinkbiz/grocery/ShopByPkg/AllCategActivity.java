@@ -45,7 +45,7 @@ public class AllCategActivity extends AppCompatActivity {
         mRequestQueueSB = Volley.newRequestQueue(this);
         recyclerViewSB = (RecyclerView) findViewById(R.id.recyclerview2);
         recyclerViewSB.setNestedScrollingEnabled(false);
-        recyclerViewSB.setLayoutManager(new GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false));
+        recyclerViewSB.setLayoutManager(new GridLayoutManager(this,3,RecyclerView.VERTICAL,false));
         recyclerViewSB.setHasFixedSize(true);
 
         parseJSON2();

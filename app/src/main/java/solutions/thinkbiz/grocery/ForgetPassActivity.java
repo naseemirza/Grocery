@@ -82,7 +82,7 @@ public class ForgetPassActivity extends AppCompatActivity {
 
         final String email = editText.getText().toString().trim();
 
-        String url="https://demotbs.com/dev/grocery/webservices/forget_password";
+        String url="http://memorstoreonline.com/webservices/forget_password";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

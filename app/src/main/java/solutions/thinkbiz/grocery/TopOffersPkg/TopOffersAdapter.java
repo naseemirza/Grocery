@@ -47,8 +47,7 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
         final TopOffersModel product = productList.get(position);
 
         String price=product.getmPrice();
-        //String symbol=product.getmCurrency();
-       // String price1 = price.substring(0, price.indexOf("."));
+
         Currency currency = Currency.getInstance(product.getmCurrency());
         final String symbol = currency.getSymbol();
          //Log.e("euro", symbol);
@@ -57,7 +56,6 @@ public class TopOffersAdapter extends RecyclerView.Adapter<TopOffersAdapter.Prod
         holder.textViewoff.setText(product.getOfftext() + "%");
         holder.textViewpricetype.setText(symbol+" ");
         holder.textViewPrice.setText(product.getmPrice());
-      //  holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getmImageUrl()));
 
         Glide.with(mCtx)
                 .load(product.getmImageUrl())

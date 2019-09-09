@@ -153,8 +153,7 @@ public class DateTimeActivity extends AppCompatActivity {
         final String timetxt=txtTime.getText().toString();
         final String datetimetxt=datetxt+" "+timetxt;
 
-
-        String url="https://demotbs.com/dev/grocery/webservices/collectByStore?user_id="+userId+"&date_time="+datetimetxt+"&total_amount="+price;
+        String url="http://memorstoreonline.com/webservices/collectByStore?user_id="+userId+"&date_time="+datetimetxt+"&total_amount="+price;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
                     @Override

@@ -68,7 +68,6 @@ public class MyFirebaseMessagingService  extends FirebaseMessagingService {
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setAutoCancel(true);
 
-
         mNotificationManager.notify(1000, notificationBuilder.build());
     }
 }

@@ -51,7 +51,6 @@ public class CheckOutActivity extends AppCompatActivity {
 
     RadioGroup radioGroup;
     RadioButton radioButton1,radioButton2;
-   // Button dlivrbtn, Clctstrbtn;
 
     String mname,memail,mcontact;
 
@@ -74,9 +73,6 @@ public class CheckOutActivity extends AppCompatActivity {
         mcontact = pref.getString("Myphone", "");
 
        // Log.e("name",symbol);
-       // Log.e("name",memail);
-       // Log.e("name",mcontact);
-
 
         currencytxt=(TextView)findViewById(R.id.crncytype);
         pricetxtt=(TextView)findViewById(R.id.pricetotal);
@@ -88,8 +84,6 @@ public class CheckOutActivity extends AppCompatActivity {
         pincodetxt=(EditText)findViewById(R.id.zipcode);
         contacttxt=(EditText)findViewById(R.id.phone);
 
-       // nametxt.setText(mname);
-        //contacttxt.setText(mcontact);
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioButton1 = (RadioButton) findViewById(R.id.rb1);
@@ -101,16 +95,6 @@ public class CheckOutActivity extends AppCompatActivity {
 
                  Intent intent=new Intent(CheckOutActivity.this, MainActivity.class);
                  startActivity(intent);
-
-               // SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-               // SharedPreferences.Editor edit = pref.edit();
-               // edit.putString("Tprice", String.valueOf(total));
-
-               //edit.apply();
-
-               // Intent intent=new Intent(CheckOutActivity.this, DeliverToMeActivity.class);
-               // startActivity(intent);
-
             }
 
         });
@@ -119,9 +103,6 @@ public class CheckOutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               // Intent intent=new Intent(CheckOutActivity.this, DeliverToMeActivity.class);
-               // startActivity(intent);
-
                 SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit = pref.edit();
                 edit.putString("Tprice", String.valueOf(total));
@@ -129,43 +110,26 @@ public class CheckOutActivity extends AppCompatActivity {
                 edit.apply();
                 Intent intent=new Intent(CheckOutActivity.this, DeliverToMeActivity.class);
                 startActivity(intent);
-//                Intent intent=new Intent(CheckOutActivity.this, DateTimeActivity.class);
-//                startActivity(intent);
 
             }
         });
-
-//        continuebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor edit = pref.edit();
-//                edit.putString("Tprice", String.valueOf(total));
-//
-//                edit.apply();
-//                Intent intent = new Intent(CheckOutActivity.this, PaypalActivity.class);
-//                startActivity(intent);
-//                //intent.putExtra("Tprice", String.valueOf(total));
-//            }
-//        });
 
         mExampleList1 = new ArrayList<>();
         mRequestQueue1 = Volley.newRequestQueue(this);
         mRecyclerview1=(RecyclerView)findViewById(R.id.myRecyclerID);
         mRecyclerview1.setNestedScrollingEnabled(false);
-        mRecyclerview1.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mRecyclerview1.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
         mRecyclerview1.setHasFixedSize(true);
 
         parseJSON1();
     }
 
 
-
     public void parseJSON1() {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
-        String url="https://demotbs.com/dev/grocery/webservices/getAllCart?user_id="+userId;
+        String url="http://memorstoreonline.com/webservices/getAllCart?user_id="+userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -218,7 +182,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
         //Log.e("qty", String.valueOf(qunty1));
 
-        String url="https://demotbs.com/dev/grocery/webservices/update_cart?quantity="+qunty1+"&cart_id="+cartID;
+        String url="http://memorstoreonline.com/webservices/update_cart?quantity="+qunty1+"&cart_id="+cartID;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -267,7 +231,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
     public void DeleteMethod(final String cartID) {
 
-        String url="https://demotbs.com/dev/grocery/webservices/delete_cart?cart_id="+cartID;
+        String url="http://memorstoreonline.com/webservices/delete_cart?cart_id="+cartID;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

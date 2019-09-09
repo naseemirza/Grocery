@@ -59,16 +59,10 @@ import java.util.ArrayList;
 import solutions.thinkbiz.grocery.Checkout.CheckOutActivity;
 import solutions.thinkbiz.grocery.History.HistoryListActivity;
 import solutions.thinkbiz.grocery.ShopByPkg.AllCategActivity;
-import solutions.thinkbiz.grocery.Tabs.BstsellerPkg.BestSlrAdapter;
-import solutions.thinkbiz.grocery.Tabs.BstsellerPkg.BestSlrModel;
 import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsAdapter;
 import solutions.thinkbiz.grocery.Tabs.DealsoftheDayPkg.DealsModel;
 import solutions.thinkbiz.grocery.ShopByPkg.ShopbyAdapter;
 import solutions.thinkbiz.grocery.ShopByPkg.ShopbyModel;
-import solutions.thinkbiz.grocery.Tabs.UnderEuroPkg.UndrAdapter;
-import solutions.thinkbiz.grocery.Tabs.UnderEuroPkg.UndrModel;
-import solutions.thinkbiz.grocery.Tabs.UptoOffPkg.UptoAdapter;
-import solutions.thinkbiz.grocery.Tabs.UptoOffPkg.UptoModel;
 import solutions.thinkbiz.grocery.TopOffersPkg.TopOffersAdapter;
 import solutions.thinkbiz.grocery.TopOffersPkg.TopOffersModel;
 import solutions.thinkbiz.grocery.TopOffersPkg.ViewAllTopOfferseActivity;
@@ -81,8 +75,6 @@ public class MainActivity extends AppCompatActivity
 
 
     private EditText Etext;
-    ImageButton profilebtn, homebtn;
-    Button undereuro,uptooff,bestseller;
     private static ProgressDialog mProgressDialog;
 
     private TopOffersAdapter mExampleAdapter1;
@@ -103,40 +95,18 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerViewDeals;
 
 
-//    // Under Euro 1
-      private UndrAdapter mExampleAdapterUndr;
-     private ArrayList<UndrModel> productListUndr;
-    private RequestQueue mRequestQueueUndr;
-    private RecyclerView recyclerViewUndr;
-//
-//    // Upto
-     private UptoAdapter mExampleAdapterUpto;
-     private ArrayList<UptoModel> productListUpto;
-    private RequestQueue mRequestQueueUpto;
-    private RecyclerView recyclerViewupto;
-//
-//    // Upto
-      private BestSlrAdapter mExampleAdapterBst;
-      private ArrayList<BestSlrModel> productListBst;
-    private RequestQueue mRequestQueueBst;
-    private RecyclerView recyclerViewbstslr;
-
-
     Button textdls,textundr,textupto,textbstslr;
     String uemail;
     TextView textViewname;
     RelativeLayout CartBtn;
-
     TextView textvall;
-
-    Dialog dialog;
     String userId;
     TextView CartItem;
     int contr=0;
      int countitem;
     ImageButton allcate;
     ImageView banner;
-    ImageView advrtise;
+
 
     public static String token;
 
@@ -168,24 +138,14 @@ public class MainActivity extends AppCompatActivity
             String channelDescription = "notificationDescription";
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel notificationChannel = new NotificationChannel(id, channelName, importance);
-//            notificationChannel.setDescription(channelDescription);
-//            notificationChannel.enableLights(true);
-//            notificationChannel.setLightColor(Color.RED);
-//            notificationChannel.enableVibration(true);
-//            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
 
             NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(notificationChannel);
-           // builder.setChannelId(id);
         }
-
 
         token =  FirebaseInstanceId.getInstance().getToken();
            Log.d("token", token);
-
-        //Advertisement
-        //ads=false;
 
            if (ads) {
                ImageView advrtise = (ImageView) findViewById(R.id.adsimg);
@@ -295,41 +255,23 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 parseJSONDeals();
                 textundr.setTextColor(getResources().getColor(R.color.colorBlack));
-               // textupto.setTextColor(getResources().getColor(R.color.colorBlack));
                 textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
                 textdls.setTextColor(getResources().getColor(R.color.maincolor));
             }
         });
 
-        //Under Euro 1
+        //Top Seller
 
         textundr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 parseJSONUndr();
                 textdls.setTextColor(getResources().getColor(R.color.colorBlack));
-                //textupto.setTextColor(getResources().getColor(R.color.colorBlack));
                 textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
                 textundr.setTextColor(getResources().getColor(R.color.maincolor));
 
             }
         });
-
-
-        //Up to Off
-
-//        textupto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                parseJSONUpto();
-//                textdls.setTextColor(getResources().getColor(R.color.colorBlack));
-//                textundr.setTextColor(getResources().getColor(R.color.colorBlack));
-//                textbstslr.setTextColor(getResources().getColor(R.color.colorBlack));
-//                textupto.setTextColor(getResources().getColor(R.color.maincolor));
-//
-//            }
-//        });
-
 
         //Best Seller
 
@@ -339,7 +281,6 @@ public class MainActivity extends AppCompatActivity
                 parseJSONBstslr();
                 textdls.setTextColor(getResources().getColor(R.color.colorBlack));
                 textundr.setTextColor(getResources().getColor(R.color.colorBlack));
-               // textupto.setTextColor(getResources().getColor(R.color.colorBlack));
                 textbstslr.setTextColor(getResources().getColor(R.color.maincolor));
 
             }
@@ -357,52 +298,6 @@ public class MainActivity extends AppCompatActivity
         textViewname.setText(uemail);
 
     }
-
-//    private void DealsTabName() {
-//
-//            String url="http://demotbs.com/dev/grocery/webservices/deals_tab";
-//            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//
-//                        try {
-//                            JSONArray rootJsonArray = new JSONArray(response);
-//
-//                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
-//
-//                            for (int i = 0; i < rootJsonArray.length(); i++) {
-//                                JSONObject obj = rootJsonArray.getJSONObject(i);
-//
-//                                String delas=obj.getString("first_field");
-//                                String underEuro=obj.getString("second_field");
-//                                String upto=obj.getString("third_field");
-//                                String bestsller=obj.getString("fourth_field");
-//                                // Log.e("dls", delas);
-//
-//                                textdls.setText(delas);
-//                                textundr.setText(underEuro);
-//                                //textupto.setText(upto);
-//                                textbstslr.setText(bestsller);
-//                            }
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//
-//                        Log.e("TAg",error.getMessage());
-//                    }
-//                });
-//
-//              RequestQueue queue2 = Volley.newRequestQueue(MainActivity.this);
-//              queue2.add(stringRequest);
-//        }
 
     private void openDailyInventoryBottomSheet() {
 
@@ -425,7 +320,6 @@ public class MainActivity extends AppCompatActivity
                 SharedPreferences.Editor edit = pref.edit();
                 edit.putBoolean("Booltype1", LoginActivity.ads);
                 edit.apply();
-               // startActivity(new Intent(MainActivity.this,MainActivity.class));
                 mBottomSheetDialog.dismiss();
             }
         });
@@ -447,7 +341,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
-
         mBottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
@@ -456,16 +349,15 @@ public class MainActivity extends AppCompatActivity
         });
 
         handler.postDelayed(runnable, 6000);
-       // LoginActivity.ads =false;
 
     }
-
 
     private void AdvertiseImage(final ImageView image) {
 
         //showSimpleProgressDialog(this, "Loading...","Fetching Json",false);
 
-        String url="https://demotbs.com/dev/grocery/webservices/advertise_image";
+       // String url="https://demotbs.com/dev/grocery/webservices/advertise_image";
+        String url="http://memorstoreonline.com/webservices/advertise_image";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -476,7 +368,8 @@ public class MainActivity extends AppCompatActivity
                         try {
                             JSONObject obj = new JSONObject(response);
                             String msg=obj.getString("advertise_image");
-                            String path="https://demotbs.com/dev/grocery/assets/uploads/advertise_image/"+msg;
+                            //String path="https://demotbs.com/dev/grocery/assets/uploads/advertise_image/"+msg;
+                            String path="http://memorstoreonline.com/assets/uploads/advertise_image/"+msg;
                             Log.e("Response", path);
 
                             Glide.with(MainActivity.this)
@@ -507,7 +400,8 @@ public class MainActivity extends AppCompatActivity
 
     private void mainImage() {
 
-        String url="https://demotbs.com/dev/grocery/webservices/main_image";
+       // String url="https://demotbs.com/dev/grocery/webservices/main_image";
+        String url="http://memorstoreonline.com/webservices/main_image";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -518,8 +412,9 @@ public class MainActivity extends AppCompatActivity
                         try {
                             JSONObject obj = new JSONObject(response);
                             String msg=obj.getString("main_image");
-                            String path="https://demotbs.com/dev/grocery/assets/uploads/slider/"+msg;
-                        //    Log.e("Response", path);
+                            //String path="https://demotbs.com/dev/grocery/assets/uploads/slider/"+msg;
+                            String path="http://memorstoreonline.com/assets/uploads/slider/"+msg;
+                            //Log.e("Response", path);
 
                             Glide.with(MainActivity.this)
                                     .load(path)
@@ -548,7 +443,8 @@ public class MainActivity extends AppCompatActivity
 
     private void getCount() {
 
-        String url="https://demotbs.com/dev/grocery/webservices/count_cart?user_id="+userId;
+       // String url="https://demotbs.com/dev/grocery/webservices/count_cart?user_id="+userId;
+        String url="http://memorstoreonline.com/webservices/count_cart?user_id="+userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -729,7 +625,7 @@ public class MainActivity extends AppCompatActivity
 
     private void parseJSONUndr() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,AllURLs.UNDER_EURO1,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, AllURLs.UNDER_EURO1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -737,10 +633,10 @@ public class MainActivity extends AppCompatActivity
                         // progressBar.setVisibility(View.INVISIBLE);
 
                         try {
-                            Log.e("rootJsonArray",response);
+                            Log.e("rootJsonArray", response);
                             JSONArray rootJsonArray = new JSONArray(response);
 
-                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
+                            Log.e("rootJsonArrayLength", rootJsonArray.length() + "");
                             productListDls.clear();
                             for (int i = 0; i < rootJsonArray.length(); i++) {
                                 JSONObject object = rootJsonArray.getJSONObject(i);
@@ -754,7 +650,7 @@ public class MainActivity extends AppCompatActivity
                                         object.optString("product_description")));
                             }
 
-                            Log.e("rootJsonArray",productListDls.size()+"");
+                            Log.e("rootJsonArray", productListDls.size() + "");
 
                             mExampleAdapterDls = new DealsAdapter(MainActivity.this, productListDls);
                             recyclerViewDeals.setAdapter(mExampleAdapterDls);
@@ -771,7 +667,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e("TAg",error.getMessage());
+                        Log.e("TAg", error.getMessage());
                     }
                 });
 
@@ -779,60 +675,6 @@ public class MainActivity extends AppCompatActivity
         mRequestQueueDls.add(stringRequest);
 
     }
-
-//    private void parseJSONUpto() {
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET,AllURLs.UPTO_OFF,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//
-//                        // progressBar.setVisibility(View.INVISIBLE);
-//
-//                        try {
-//                            Log.e("rootJsonArray",response);
-//                            JSONArray rootJsonArray = new JSONArray(response);
-//
-//                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
-//                            productListDls.clear();
-//                            for (int i = 0; i < rootJsonArray.length(); i++) {
-//                                JSONObject object = rootJsonArray.getJSONObject(i);
-//
-//                                productListDls.add(new DealsModel(object.optString("id"),
-//                                        object.optString("main_image"),
-//                                        object.optString("offer_percent"),
-//                                        object.optString("product_name"),
-//                                        object.optString("currency"),
-//                                        object.optString("product_special_price"),
-//                                        object.optString("product_description")));
-//                            }
-//
-//                            Log.e("rootJsonArray",productListDls.size()+"");
-//
-//                            mExampleAdapterDls = new DealsAdapter(MainActivity.this, productListDls);
-//                            recyclerViewDeals.setAdapter(mExampleAdapterDls);
-//                            mExampleAdapterDls.notifyDataSetChanged();
-//                            recyclerViewDeals.setHasFixedSize(true);
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//                        Log.e("TAg",error.getMessage());
-//                    }
-//                });
-//
-//        mRequestQueueDls = Volley.newRequestQueue(this);
-//        mRequestQueueDls.add(stringRequest);
-//
-//    }
-
 
     private void parseJSONBstslr() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET,AllURLs.BEST_SELLER,
@@ -898,27 +740,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-////        if (id == R.id.action_settings) {
-////            return true;
-////        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

@@ -50,7 +50,7 @@ public class HistoryListActivity extends AppCompatActivity {
         mRequestQueue1 = Volley.newRequestQueue(this);
         mRecyclerview1=(RecyclerView)findViewById(R.id.myRecyclerID);
         mRecyclerview1.setNestedScrollingEnabled(false);
-        mRecyclerview1.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mRecyclerview1.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
         mRecyclerview1.setHasFixedSize(true);
 
         parseJSON1();
@@ -61,7 +61,7 @@ public class HistoryListActivity extends AppCompatActivity {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
-        String url="https://demotbs.com/dev/grocery/webservices/getAllorder?user_id="+userId;
+        String url="http://memorstoreonline.com/webservices/getAllorder?user_id="+userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -109,7 +109,7 @@ public class HistoryListActivity extends AppCompatActivity {
 
     public void AddToMethod(String id) {
 
-        String url="https://demotbs.com/dev/grocery/webservices/reorder?id="+id+"&user_id="+userId;
+        String url="http://memorstoreonline.com/webservices/reorder?id="+id+"&user_id="+userId;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

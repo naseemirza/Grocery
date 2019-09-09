@@ -113,42 +113,12 @@ public class ContactUsActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-//                Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"));
-//                PackageManager pm = getPackageManager();
-//
-//                List<ResolveInfo> resInfo = pm.queryIntentActivities(emailIntent, 0);
-//                if (resInfo.size() > 0) {
-//                    ResolveInfo ri = resInfo.get(0);
-//                    // First create an intent with only the package name of the first registered email app
-//                    // and build a picked based on it
-//                    Intent intentChooser = pm.getLaunchIntentForPackage(ri.activityInfo.packageName);
-//                    Intent openInChooser =
-//                            Intent.createChooser(intentChooser,
-//                                    getString(R.string.mail));
-//
-//                    // Then create a list of LabeledIntent for the rest of the registered email apps
-//                    List<LabeledIntent> intentList = new ArrayList<LabeledIntent>();
-//                    for (int i = 1; i < resInfo.size(); i++) {
-//                        // Extract the label and repackage it in a LabeledIntent
-//                        ri = resInfo.get(i);
-//                        String packageName = ri.activityInfo.packageName;
-//                        Intent intent = pm.getLaunchIntentForPackage(packageName);
-//                        intentList.add(new LabeledIntent(intent, packageName, ri.loadLabel(pm), ri.icon));
-//                    }
-//
-//                    LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);
-//                    // Add the rest of the email apps to the picker selection
-//                    openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
-//                    startActivity(openInChooser);
-//                }
-
             }
         });
 
         ContactUs();
 
         Submitbtn=(Button)findViewById(R.id.buttonsbmt);
-
         Submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,7 +134,7 @@ public class ContactUsActivity extends AppCompatActivity {
 
     private void ContactUs() {
 
-            String url="https://demotbs.com/dev/grocery/webservices/contact_address";
+            String url="http://memorstoreonline.com/webservices/contact_address";
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
@@ -228,21 +198,9 @@ public class ContactUsActivity extends AppCompatActivity {
             Uemail.requestFocus();
             return false;
         }
-//        if (Uphone.getText().toString().length() == 0) {
-//            Uphone.setError("Phone number not entered");
-//            Uphone.requestFocus();
-//            return false;
-//        }
-//
-//        if (Umsg.getText().toString().length() == 0) {
-//            Umsg.setError("Please enter message");
-//            Umsg.requestFocus();
-//            return false;
-//        }
 
         return true;
     }
-
 
     private void ContctUs(){
 
@@ -255,7 +213,7 @@ public class ContactUsActivity extends AppCompatActivity {
         final String phone = Uphone.getText().toString().trim();
         final String message = Umsg.getText().toString().trim();
 
-        String url="https://demotbs.com/dev/grocery/webservices/contactForm?email="+email+"&name="+name+"&phone="+phone+"&message="+message;
+        String url="http://memorstoreonline.com/webservices/contactForm?email="+email+"&name="+name+"&phone="+phone+"&message="+message;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
                 new Response.Listener<String>() {
                     @Override

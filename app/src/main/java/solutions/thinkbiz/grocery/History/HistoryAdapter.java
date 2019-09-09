@@ -47,11 +47,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ProductV
         final String symbol = currency.getSymbol();
 
         holder.textViewname.setText(product.getmName());
-        //holder.textViewtime.setText(product.getTime());
         holder.textViewcurrncy1.setText(symbol);
         holder.textViewprice1.setText(product.getmPrice());
-        //final String textprice= String.valueOf(productList.get(position).getmPrice());
-        //holder.textViewprice1.setText(textprice);
         holder.textViewQty1.setText(product.getQty());
 
         Glide.with(mCtx)
@@ -68,13 +65,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder  {
         TextView textViewname;
-        TextView textViewtime, textViewcurrncy1,textViewprice1, textViewQty1;
+        TextView textViewcurrncy1,textViewprice1, textViewQty1;
         ImageView imageView;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
             textViewname = itemView.findViewById(R.id.prodname);
-            //textViewtime = itemView.findViewById(R.id.timetxt);
             textViewcurrncy1 = itemView.findViewById(R.id.prdcrncy);
             textViewprice1 = itemView.findViewById(R.id.prdprice);
             textViewQty1 = itemView.findViewById(R.id.editqnty);

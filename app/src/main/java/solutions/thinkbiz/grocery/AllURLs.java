@@ -6,13 +6,13 @@ package solutions.thinkbiz.grocery;
 
 public class AllURLs {
 
-    public static final String TOP_OFFERS ="https://demotbs.com/dev/grocery/webservices/top_offer";
-    public static final String SHOP_BY_CATEGORY ="https://demotbs.com/dev/grocery/webservices/getTopCategory";
-    public static final String SHOP_BY_ALL_CATEGORY ="https://demotbs.com/dev/grocery/webservices/getAllCategory";
-    public static final String DEALS_OF_DAY ="https://demotbs.com/dev/grocery/webservices/deal_of_day";
-    public static final String UNDER_EURO1 ="https://demotbs.com/dev/grocery/webservices/under_euro";
-    public static final String UPTO_OFF ="https://demotbs.com/dev/grocery/webservices/under_discount";
-    public static final String BEST_SELLER ="https://demotbs.com/dev/grocery/webservices/best_seller";
-    public static final String Shopby_details ="https://demotbs.com/dev/grocery/webservices/productBycategory?id=";
+    public static final String TOP_OFFERS ="http://memorstoreonline.com/webservices/top_offer";
+    public static final String SHOP_BY_CATEGORY ="http://memorstoreonline.com/webservices/getTopCategory";
+    public static final String SHOP_BY_ALL_CATEGORY ="http://memorstoreonline.com/webservices/getAllCategory";
+    public static final String DEALS_OF_DAY ="http://memorstoreonline.com/webservices/deal_of_day";
+    public static final String UNDER_EURO1 ="http://memorstoreonline.com/webservices/under_euro";
+    public static final String UPTO_OFF ="http://memorstoreonline.com/webservices/under_discount";
+    public static final String BEST_SELLER ="http://memorstoreonline.com/webservices/best_seller";
+    public static final String Shopby_details ="http://memorstoreonline.com/webservices/productBycategory?id=";
 
 }

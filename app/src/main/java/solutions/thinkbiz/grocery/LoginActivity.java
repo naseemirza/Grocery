@@ -231,8 +231,8 @@ public class LoginActivity extends AppCompatActivity {
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPass.getText().toString().trim();
 
-       // String url="https://demotbs.com/dev/grocery/webservices/login?";
-        String url="https://demotbs.com/dev/grocery/webservices/login?email="+email+"&password="+password+"&device_token="+token;
+        //String url="https://demotbs.com/dev/grocery/webservices/login?email="+email+"&password="+password+"&device_token="+token;
+        String url="http://memorstoreonline.com/webservices/login?email="+email+"&password="+password+"&device_token="+token;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -293,18 +293,6 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 });
-
-//        {
-//            @Override
-//
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("email", email);
-//                params.put("password", password);
-//                params.put("device_token", token);
-//                return params;
-//            }
-//        };
 
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(stringRequest);

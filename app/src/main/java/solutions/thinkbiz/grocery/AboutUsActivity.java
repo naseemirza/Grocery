@@ -25,7 +25,7 @@ public class AboutUsActivity extends AppCompatActivity {
 
         mywebview = (WebView) findViewById(R.id.webView1);
         mywebview.setWebViewClient(new MyWebViewClient());
-        String url="https://demotbs.com/dev/grocery/webservices/about_us";
+        String url="http://memorstoreonline.com/webservices/about_us";
         mywebview.getSettings().setJavaScriptEnabled(true);
         mywebview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         mywebview.loadUrl(url);
