@@ -220,8 +220,6 @@ public class TopOfferDetaillsActivity extends AppCompatActivity {
                             String error= obj.getString("e");
                             String msg=obj.getString("m");
 
-                         //   Log.e("resp",msg);
-
                             if (success.equalsIgnoreCase("1"))
                             {
                                 Toast.makeText(TopOfferDetaillsActivity.this, msg, Toast.LENGTH_SHORT).show();
